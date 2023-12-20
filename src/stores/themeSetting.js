@@ -19,6 +19,21 @@ export const useThemeSetting = defineStore("themeSetting", {
             this.isDarkMode = ''
             return this.isDarkMode;
         },
+        
+        async grayMode(){
+            this.isDarkMode = 'gray'
+            return this.isDarkMode;
+        },
+        
+        async contrastMode(){
+            this.isDarkMode = 'contrast'
+            return this.isDarkMode;
+        },
+        
+        async negativeContrastMode(){
+            this.isDarkMode = 'negative-contrast'
+            return this.isDarkMode;
+        },
      },
 
 })

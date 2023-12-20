@@ -41,7 +41,7 @@ onMounted(() => {
                         <swiper-slide>
                             <div class="single-slide align-center-left animation-style-02 bg-2">
                                 <div class="slider-progress"></div>
-                                <div class="slider-content" style="background-image:url('http://localhost:5173/src/assets/images/banner/banner2.jpg');width:100%;">
+                                <div class="slider-content" style="background-image:url('https://www.homecare-aid.com/wp-content/uploads/Different-types-of-Home-Care-.jpg');width:100%;">
                                     <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 17, 0, 0.1));"></div>
                                     <div class="row" style="padding: 0 50px;">
                                         <div class="col-md-8 d-flex align-items-center" style="height: 400px;">
@@ -60,7 +60,7 @@ onMounted(() => {
                         <swiper-slide>
                             <div class="single-slide align-center-left animation-style-02 bg-2">
                                 <div class="slider-progress"></div>
-                                <div class="slider-content" style="background-image:url('http://localhost:5173/src/assets/images/banner/banner1.jpeg');width:100%;">
+                                <div class="slider-content" style="background-image:url('https://www.homecare-aid.com/wp-content/uploads/Different-types-of-Home-Care-.jpg');width:100%;">
                                     <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 17, 0, 0.1));"></div>
                                     <div class="row" style="padding: 0 50px;">
                                         <div class="col-md-8 d-flex align-items-center" style="height: 400px;">
@@ -79,7 +79,7 @@ onMounted(() => {
                         <swiper-slide>
                             <div class="single-slide align-center-left animation-style-02 bg-2">
                                 <div class="slider-progress"></div>
-                                <div class="slider-content" style="background-image:url('http://localhost:5173/src/assets/images/banner/banner3.jpg');width:100%;">
+                                <div class="slider-content" style="background-image:url('https://www.homecare-aid.com/wp-content/uploads/Different-types-of-Home-Care-.jpg');width:100%;">
                                     <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 17, 0, 0.1));"></div>
                                     <div class="row" style="padding: 0 50px;">
                                         <div class="col-md-8 d-flex align-items-center" style="height: 400px;">
@@ -106,6 +106,33 @@ onMounted(() => {
                     <p :class="{'white' : isDarkMode=='dark'}">State Care provides exceptional personal care services that allow our clients to continue living within the comfort of their homes. We are proud to be widely recognised as one of the best staff suppliers in our industry.</p>
                 </div>
                 <div class="row mt-4">
+                    <div class="col-md-4 mb-4">
+                        <div class="service-box">
+                            <div class="service-content">
+                                <h3 class="white mb-4">Domiciliary Care Services</h3>
+                                <img src="@/assets/images/service/service1.jpg" alt="">
+                                <button class="btn btn-danger mt-4">Find Out More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="service-box">
+                            <div class="service-content">
+                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
+                                <img src="@/assets/images/service/service1.jpg" alt="">
+                                <button class="btn btn-danger mt-4">Find Out More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="service-box">
+                            <div class="service-content">
+                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
+                                <img src="@/assets/images/service/service1.jpg" alt="">
+                                <button class="btn btn-danger mt-4">Find Out More</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-4 mb-4">
                         <div class="service-box">
                             <div class="service-content">
@@ -137,7 +164,7 @@ onMounted(() => {
             </div>
         </section>
         <section class="mt-4 mb-4 care-section">
-            <div class="p-4 care-area" >
+            <div class="p-4 care-area" style="background-image: url('http://localhost:5173/src/assets/images/banner/banner3.jpg');">
                 <div class="container care-content">
                     <div class="section-header text-center">
                         <h1 class="text-center white" style="font-weight:900;">State Care</h1>
@@ -157,18 +184,61 @@ onMounted(() => {
                 </div>
             </div>
         </section>
-        <section class="mt-4">
+        <section class="mt-4 mb-4">
             <div class="container">
                 <div class="section-header text-center">
                     <h1 class="text-center" style="font-weight:900;" :class="{'white' : isDarkMode=='dark'}">Our Mission </h1>
                     <p :class="{'white' : isDarkMode=='dark'}">We aim to provide a homely environment where care and support is provided involving all our clients, their relatives, friends, medical professionals and other relevant personnel as appropriate to meet the essential needs of our clients. </p>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-6 mission-img">
+                    <div class="col-md-6 mb-4 mission-img">
                         <img src="https://concordcare.co.uk/_nuxt/mission-img.e0daf02e.webp" alt="">
                     </div>
                     <div class="col-md-6">
-
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 mb-4">
+                                <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
+                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <h4>Supported Living</h4>
+                                    <p>Home care for specialist dementia service users.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 mb-4">
+                                <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
+                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <h4>Supported Living</h4>
+                                    <p>Home care for specialist dementia service users.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 mb-4">
+                                <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
+                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <h4>Supported Living</h4>
+                                    <p>Home care for specialist dementia service users.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 mb-4">
+                                <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
+                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <h4>Supported Living</h4>
+                                    <p>Home care for specialist dementia service users.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 mb-4">
+                                <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
+                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <h4>Supported Living</h4>
+                                    <p>Home care for specialist dementia service users.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 mb-4">
+                                <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
+                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <h4>Supported Living</h4>
+                                    <p>Home care for specialist dementia service users.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -247,19 +317,24 @@ onMounted(() => {
 
 }
 .care-area{
-    background-image: url('@/assets/images/banner/banner3.jpg');
     background-attachment: fixed;
     background-size:cover;
-}
-.mission-img{
-    background-color: #CA0F20;
-    border-radius: 25px;
-    padding: 20px;
 }
 .mission-img img{
     max-width: 100%;
     width: 100%;
     border-radius: 25px;
 }
-
+.mission-item{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 10px;
+    border-radius: 6px;
+}
+.mission-item:hover{
+    background-color: #CA0F20;
+    color: #fff;
+}
+.gray-slider {
+    filter: grayscale(100%) !important;
+}
 </style>
