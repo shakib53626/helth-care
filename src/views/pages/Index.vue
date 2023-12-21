@@ -248,10 +248,13 @@ onMounted(() => {
 
 
 <style scoped>
+.home-slider{
+    margin-top: 16px;
+}
 .home-slider img{
     max-width: 100%;
     width: 100%;
-    max-height: 400px;
+    max-height: 400px;    
 }
 .swiper-slide{
     height: 100%;

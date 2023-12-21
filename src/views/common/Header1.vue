@@ -39,10 +39,10 @@ onBeforeUnmount(() => {
             <div class="container" style="padding:0;" :class="{'gray-slider' : themeSetting.isDarkMode=='gray', 'contrast' : themeSetting.isDarkMode=='contrast'}">
                 <div class="header_flex">
                 <div v-if="themeSetting.isDarkMode == 'dark'">
-                    <a href="/"><img src="@/assets/images/light-logo.png" width="80" alt="logo" class="logo"></a>
+                    <router-link :to="{name: 'index'}"><img src="@/assets/images/light-logo.png" width="80" alt="logo" class="logo"></router-link>
                 </div>
                 <div v-else>
-                    <a href="/"><img src="@/assets/images/logo.png" width="80" alt="logo" class="logo"></a>
+                    <router-link :to="{name: 'index'}"><img src="@/assets/images/logo.png" width="80" alt="logo" class="logo"></router-link>
                 </div>
                 <div class="d_flex gap_26">
                     <div class="d_flex gap_26">
@@ -79,21 +79,8 @@ onBeforeUnmount(() => {
                 <nav class="dark_bg" id="menu" :class="{'active' : burger}">
                     <div class="container">
                         <ul>
-                            <li><router-link :to="{name : 'index'}" :class="{'active' : route.name == 'index'}">Home</router-link></li>
-                            <li><a href="javascript:void(0)">About us</a></li>
-                            <li><a href="javascript:void(0)">Services</a></li>
-                            <li><a href="javascript:void(0)">Forms</a></li>
-                            <li>
-                            <a class="has_sub_menu" href="javascript:void(0)">Calculators</a>
-                            <ul class="sub_menu">
-                                <li><a class="menu-link" href="javascript:void(0)">Tax calulator</a>
-                                </li>
-                                <li><a class="menu-link" href="javascript:void(0)">TDS calulator</a>
-                                </li>
-                            </ul>
-                            </li>
-                            <li><a href="javascript:void(0)">Insights</a></li>
-                            <li><a href="javascript:void(0)">Ebooks</a></li>
+                            <li><router-link :to="{name : 'index'}" :class="{'active' : route.name == 'index'}" @click.prevent="burgerButton">Home</router-link></li>
+                            <li><router-link :to="{name : 'about'}" :class="{'active' : route.name == 'about'}" @click.prevent="burgerButton">About us</router-link></li>
                             <li><a href="javascript:void(0)">Contact us</a></li>
                         </ul>
                     </div>

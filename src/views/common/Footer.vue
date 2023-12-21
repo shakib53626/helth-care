@@ -17,11 +17,12 @@ const themeSetting = useThemeSetting();
                     <div class="col-md-2 white mt-4">
                         <span style="font-size:22px;">Quick Link</span>
                         <ul>
-                            <li><a href="" class="white">Home</a></li>
+                            <li><router-link :to="{name: 'index'}" class="white">Home</router-link></li>
                             <li><a href="" class="white">Our Services</a></li>
                             <li><a href="" class="white">About Us</a></li>
                             <li><a href="" class="white">Contact Us</a></li>
                             <li><a href="" class="white">Our Mission</a></li>
+                            <li><router-link :to="{name : 'login'}" class="white">Login</router-link></li>
                         </ul>
                     </div>
                     <div class="col-md-2 white mt-4">

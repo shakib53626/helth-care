@@ -24,7 +24,7 @@ const themeSetting = useThemeSetting();
                     <div class="d-flex justify-content-between">
                         <div>
                             <input type="checkbox" id="remember">
-                            <label for="remember" class="ml-2">Remember Me</label><br>
+                            <label for="remember" class="ml-2" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Remember Me</label><br>
                         </div>
                         <button class="btn btn-danger">Login</button>
                     </div>
@@ -38,7 +38,7 @@ const themeSetting = useThemeSetting();
 
 <style scoped>
      .login-card{
-        width: 300px;
+        width: 350px;
         border-top: 3px solid #CA0F20;
         border-radius: 8px;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
