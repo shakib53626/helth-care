@@ -1,7 +1,9 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useThemeSetting } from '@/stores';
+import { useRoute } from 'vue-router';
 
+const route = useRoute()
 const themeSetting = useThemeSetting();
 
 const burger = ref(false);
@@ -61,7 +63,7 @@ onBeforeUnmount(() => {
                     </div>
                     </div>
                     <div class="header_cta">
-                    <a href="javascript:void(0)" class="btn_one">Book a call</a>
+                        <router-link :to="{name : 'login'}" class="btn_one">Login</router-link>
                     </div>
 
                     <button type="button" class="burger" :class="{'active' : burger}" id="burger" @click.prevent="burgerButton">
@@ -74,26 +76,26 @@ onBeforeUnmount(() => {
             </div>
             <div class="overlay" :class="{'active' : burger}" @click.prevent="burgerButton"></div>
             <div class="nav-wrapper" :class="{'gray-slider' : themeSetting.isDarkMode=='gray', 'contrast' : themeSetting.isDarkMode=='contrast'}">
-                <nav class="dark_bg" id="menu">
+                <nav class="dark_bg" id="menu" :class="{'active' : burger}">
                     <div class="container">
-                    <ul>
-                        <li><a href="javascript:void(0)" class="active">Home</a></li>
-                        <li><a href="javascript:void(0)">About us</a></li>
-                        <li><a href="javascript:void(0)">Services</a></li>
-                        <li><a href="javascript:void(0)">Forms</a></li>
-                        <li>
-                        <a class="has_sub_menu" href="javascript:void(0)">Calculators</a>
-                        <ul class="sub_menu">
-                            <li><a class="menu-link" href="javascript:void(0)">Tax calulator</a>
+                        <ul>
+                            <li><router-link :to="{name : 'index'}" :class="{'active' : route.name == 'index'}">Home</router-link></li>
+                            <li><a href="javascript:void(0)">About us</a></li>
+                            <li><a href="javascript:void(0)">Services</a></li>
+                            <li><a href="javascript:void(0)">Forms</a></li>
+                            <li>
+                            <a class="has_sub_menu" href="javascript:void(0)">Calculators</a>
+                            <ul class="sub_menu">
+                                <li><a class="menu-link" href="javascript:void(0)">Tax calulator</a>
+                                </li>
+                                <li><a class="menu-link" href="javascript:void(0)">TDS calulator</a>
+                                </li>
+                            </ul>
                             </li>
-                            <li><a class="menu-link" href="javascript:void(0)">TDS calulator</a>
-                            </li>
+                            <li><a href="javascript:void(0)">Insights</a></li>
+                            <li><a href="javascript:void(0)">Ebooks</a></li>
+                            <li><a href="javascript:void(0)">Contact us</a></li>
                         </ul>
-                        </li>
-                        <li><a href="javascript:void(0)">Insights</a></li>
-                        <li><a href="javascript:void(0)">Ebooks</a></li>
-                        <li><a href="javascript:void(0)">Contact us</a></li>
-                    </ul>
                     </div>
                 </nav>
             </div>

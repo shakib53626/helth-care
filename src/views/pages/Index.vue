@@ -198,42 +198,42 @@ onMounted(() => {
                         <div class="row">
                             <div class="col-md-6 col-sm-6 mb-4">
                                 <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
-                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <i class="mission-icon fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
                                     <h4>Supported Living</h4>
                                     <p>Home care for specialist dementia service users.</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 mb-4">
                                 <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
-                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <i class="mission-icon fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
                                     <h4>Supported Living</h4>
                                     <p>Home care for specialist dementia service users.</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 mb-4">
                                 <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
-                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <i class="mission-icon fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
                                     <h4>Supported Living</h4>
                                     <p>Home care for specialist dementia service users.</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 mb-4">
                                 <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
-                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <i class="mission-icon fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
                                     <h4>Supported Living</h4>
                                     <p>Home care for specialist dementia service users.</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 mb-4">
                                 <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
-                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <i class="mission-icon fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
                                     <h4>Supported Living</h4>
                                     <p>Home care for specialist dementia service users.</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 mb-4">
                                 <div class="mission-item text-center" :class="{'white' : isDarkMode=='dark'}">
-                                    <i class="fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
+                                    <i class="mission-icon fa-solid fa-house-medical-circle-check" style="font-size: 30px;"></i>
                                     <h4>Supported Living</h4>
                                     <p>Home care for specialist dementia service users.</p>
                                 </div>
@@ -330,9 +330,16 @@ onMounted(() => {
     padding: 10px;
     border-radius: 6px;
 }
+.mission-item i{
+    margin : 5px 0;
+    color: #CA0F20;
+}
 .mission-item:hover{
     background-color: #CA0F20;
     color: #fff;
+}
+.mission-item:hover .mission-icon{
+    color: #fff !important;
 }
 .gray-slider {
     filter: grayscale(100%) !important;

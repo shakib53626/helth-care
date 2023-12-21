@@ -1,1 +1,7 @@
 @import '@/assets/css/main.css';
+@import 'nprogress/nprogress.css';
+
+#nprogress .bar {
+    height: 4px !important;
+    background: #CA0F20 !important;
+}
