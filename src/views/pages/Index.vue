@@ -1,9 +1,20 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
-import { useThemeSetting } from '@/stores'
+import { useThemeSetting, useHomeSlider } from '@/stores'
+import { SliderSkeleton } from '@/components'
 
+const slider       = useHomeSlider();
 const themeSetting = useThemeSetting();
-const isDarkMode = ref(themeSetting.isDarkMode);
+const isDarkMode   = ref(themeSetting.isDarkMode);
+
+const sliders   = ref({});
+
+const getSliders = async() =>{
+    const res = await slider.getSliders();
+    if(res.success){
+        sliders.value = res.result;
+    }
+} 
 
 watch(() => themeSetting.isDarkMode, (newValue) => {
   isDarkMode.value = newValue;
@@ -17,7 +28,7 @@ import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from 'swiper/m
 const modules = ref([Navigation, Pagination, Mousewheel, Keyboard, Autoplay]);
 
 onMounted(() => {
-    
+    getSliders();
 })
 </script>
 <template>
@@ -38,63 +49,30 @@ onMounted(() => {
                         :modules="modules"
                         class="mySwiper"
                     >
-                        <swiper-slide>
-                            <div class="single-slide align-center-left animation-style-02 bg-2">
-                                <div class="slider-progress"></div>
-                                <div class="slider-content" style="background-image:url('https://www.homecare-aid.com/wp-content/uploads/Different-types-of-Home-Care-.jpg');width:100%;">
-                                    <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 17, 0, 0.1));"></div>
-                                    <div class="row" style="padding: 0 50px;">
-                                        <div class="col-md-8 d-flex align-items-center" style="height: 400px;">
-                                            <div class="">
-                                                <h3 class="text-light">About State Care UK: Your Trusted Healthcare Staffing Partner</h3>
-                                                <p class="mb-4 text-light" style="font-size:18px;">At State Care, we are experts in supplying a wide variety of healthcare professionals to a diverse range of clients, including hospitals and care homes. </p>
-                                                <button class="btn btn-danger">All Services</button>
+                        <template v-if="slider.loading"> 
+                            <SliderSkeleton/>
+                        </template>
+                        <template v-else>
+                            <swiper-slide v-for="(slider, index) in sliders.data" :key="index">
+                                <div class="single-slide align-center-left animation-style-02 bg-2">
+                                    <div class="slider-progress"></div>
+                                    <div class="slider-content" :style="'background-image:url('+ slider.image +');width:100%;'">
+                                        <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 17, 0, 0.1));"></div>
+                                        <div class="row" style="padding: 0 50px;">
+                                            <div class="col-md-8 d-flex align-items-center" style="height: 400px;">
+                                                <div class="">
+                                                    <h3 class="text-light">{{ slider.title }}</h3>
+                                                    <p class="mb-4 text-light" style="font-size:18px;">At State Care, we are experts in supplying a wide variety of healthcare professionals to a diverse range of clients, including hospitals and care homes. </p>
+                                                    <button class="btn btn-danger">All Services</button>
+                                                </div>
                                             </div>
+                                            <div class="col-md-4"></div>
                                         </div>
-                                        <div class="col-md-4"></div>
+                                        <!-- <img src="@/assets/images/banner/banner3.jpg" alt=""> -->
                                     </div>
-                                    <!-- <img src="@/assets/images/banner/banner3.jpg" alt=""> -->
                                 </div>
-                            </div>
-                        </swiper-slide>
-                        <swiper-slide>
-                            <div class="single-slide align-center-left animation-style-02 bg-2">
-                                <div class="slider-progress"></div>
-                                <div class="slider-content" style="background-image:url('https://www.homecare-aid.com/wp-content/uploads/Different-types-of-Home-Care-.jpg');width:100%;">
-                                    <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 17, 0, 0.1));"></div>
-                                    <div class="row" style="padding: 0 50px;">
-                                        <div class="col-md-8 d-flex align-items-center" style="height: 400px;">
-                                            <div class="">
-                                                <h3 class="text-light">About State Care UK: Your Trusted Healthcare Staffing Partner</h3>
-                                                <p class="mb-4 text-light" style="font-size:18px;">At State Care, we are experts in supplying a wide variety of healthcare professionals to a diverse range of clients, including hospitals and care homes. </p>
-                                                <button class="btn btn-danger">All Services</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                    </div>
-                                    <!-- <img src="@/assets/images/banner/banner3.jpg" alt=""> -->
-                                </div>
-                            </div>
-                        </swiper-slide>
-                        <swiper-slide>
-                            <div class="single-slide align-center-left animation-style-02 bg-2">
-                                <div class="slider-progress"></div>
-                                <div class="slider-content" style="background-image:url('https://www.homecare-aid.com/wp-content/uploads/Different-types-of-Home-Care-.jpg');width:100%;">
-                                    <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(255, 17, 0, 0.1));"></div>
-                                    <div class="row" style="padding: 0 50px;">
-                                        <div class="col-md-8 d-flex align-items-center" style="height: 400px;">
-                                            <div class="">
-                                                <h3 class="text-light">About State Care UK: Your Trusted Healthcare Staffing Partner</h3>
-                                                <p class="mb-4 text-light" style="font-size:18px;">At State Care, we are experts in supplying a wide variety of healthcare professionals to a diverse range of clients, including hospitals and care homes. </p>
-                                                <button class="btn btn-danger">All Services</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                    </div>
-                                    <!-- <img src="@/assets/images/banner/banner3.jpg" alt=""> -->
-                                </div>
-                            </div>
-                        </swiper-slide>
+                            </swiper-slide>
+                        </template>
                     </swiper>
                 </div>
             </div>
@@ -251,10 +229,10 @@ onMounted(() => {
 .home-slider{
     margin-top: 16px;
 }
-.home-slider img{
-    max-width: 100%;
-    width: 100%;
-    max-height: 400px;    
+.slider-content{
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .swiper-slide{
     height: 100%;
