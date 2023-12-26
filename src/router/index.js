@@ -2,6 +2,7 @@ import NProgress from 'nprogress'
 import {createRouter, createWebHistory} from 'vue-router'
 import Index from '@/views/pages/Index.vue'
 import AboutUs from '@/views/pages/About.vue'
+import ContactUs from '@/views/pages/Contact.vue'
 import Login from '@/views/pages/auth/Login.vue' 
 import Register from '@/views/pages/auth/Register.vue' 
 
@@ -29,6 +30,12 @@ const routes =[
       name:'about',
       component: AboutUs,
       meta: { title: 'About Us', guest: true }
+    },
+    { 
+      path: '/contact-us',
+      name:'contact',
+      component: ContactUs,
+      meta: { title: 'Contact Us', guest: true }
     },
   ];
 

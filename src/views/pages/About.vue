@@ -123,7 +123,7 @@ const themeSetting = useThemeSetting();
     font-weight: 900;
 }
 .about-team{
-    padding: 50px;
+    padding: 50px 0;
 }
 .our-team{
     background-color: #e9e9e9;

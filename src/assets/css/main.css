@@ -185,6 +185,9 @@ nav li a:hover{
 .gray-border {
     border-color: #8A8A8A !important;
 }
+.transparent{
+    background-color: transparent !important;
+}
 
 @media (max-width: 1024px) {
     header {
@@ -258,6 +261,11 @@ nav li a:hover{
     .header_cta {
         display: none !important;
     }
+
+    .grid-70-30{
+        display: grid;
+        grid-template-columns: 40% 60% !important;
+    }
 }
 
 @media (max-width: 767px) {
@@ -267,6 +275,10 @@ nav li a:hover{
     }
     .footer-area img {
         width: 150px;
+    }
+    .grid-70-30 {
+        display: grid;
+        grid-template-columns: 100% !important;
     }
 }
 

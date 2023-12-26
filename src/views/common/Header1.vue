@@ -81,7 +81,7 @@ onBeforeUnmount(() => {
                         <ul>
                             <li><router-link :to="{name : 'index'}" :class="{'active' : route.name == 'index'}" @click.prevent="burgerButton">Home</router-link></li>
                             <li><router-link :to="{name : 'about'}" :class="{'active' : route.name == 'about'}" @click.prevent="burgerButton">About us</router-link></li>
-                            <li><a href="javascript:void(0)">Contact us</a></li>
+                            <li><router-link :to="{name : 'contact'}" :class="{'active' : route.name == 'contact'}" @click.prevent="burgerButton">Contact us</router-link></li>
                         </ul>
                     </div>
                 </nav>
