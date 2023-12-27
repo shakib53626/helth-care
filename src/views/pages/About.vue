@@ -1,6 +1,20 @@
 <script setup>
-import { useThemeSetting } from '@/stores';
+import { useThemeSetting, useServiceTeam } from '@/stores';
+import { onMounted, ref } from 'vue';
 const themeSetting = useThemeSetting();
+const serviceTeam  = useServiceTeam();
+const serviceTeams = ref();
+
+const getServiceTeams = async() =>{
+    const res = await serviceTeam.getServiceTeams();
+    if(res.success){
+        serviceTeams.value = res.result?.data;
+    }
+}
+
+onMounted(() => {
+    getServiceTeams();
+})
 </script>
 
 <template>
@@ -20,63 +34,13 @@ const themeSetting = useThemeSetting();
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste possimus maiores quibusdam, aliquid esse velit.</p>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-4 mb-4" v-for="(team, index) in serviceTeams" :key="index">
                         <div class="card">
                             <div class="card-body" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
-                                <img src="@/assets/images/logo.png" width="100" alt="">
-                                <h4>HomeStay Care</h4>
-                                <h6 class="mb-3">Assistant Manager</h6>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur amet enim reiciendis mollitia. Repudiandae officiis fuga esse iure sequi vel omnis maiores dicta totam blanditiis accusamus nostrum, soluta a.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-body" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
-                                <img src="@/assets/images/logo.png" width="100" alt="">
-                                <h4>HomeStay Care</h4>
-                                <h6 class="mb-3">Assistant Manager</h6>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur amet enim reiciendis mollitia. Repudiandae officiis fuga esse iure sequi vel omnis maiores dicta totam blanditiis accusamus nostrum, soluta a.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-body" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
-                                <img src="@/assets/images/logo.png" width="100" alt="">
-                                <h4>HomeStay Care</h4>
-                                <h6 class="mb-3">Assistant Manager</h6>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur amet enim reiciendis mollitia. Repudiandae officiis fuga esse iure sequi vel omnis maiores dicta totam blanditiis accusamus nostrum, soluta a.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-body" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
-                                <img src="@/assets/images/logo.png" width="100" alt="">
-                                <h4>HomeStay Care</h4>
-                                <h6 class="mb-3">Assistant Manager</h6>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur amet enim reiciendis mollitia. Repudiandae officiis fuga esse iure sequi vel omnis maiores dicta totam blanditiis accusamus nostrum, soluta a.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-body" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
-                                <img src="@/assets/images/logo.png" width="100" alt="">
-                                <h4>HomeStay Care</h4>
-                                <h6 class="mb-3">Assistant Manager</h6>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur amet enim reiciendis mollitia. Repudiandae officiis fuga esse iure sequi vel omnis maiores dicta totam blanditiis accusamus nostrum, soluta a.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <div class="card-body" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
-                                <img src="@/assets/images/logo.png" width="100" alt="">
-                                <h4>HomeStay Care</h4>
-                                <h6 class="mb-3">Assistant Manager</h6>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur amet enim reiciendis mollitia. Repudiandae officiis fuga esse iure sequi vel omnis maiores dicta totam blanditiis accusamus nostrum, soluta a.</p>
+                                <img :src="team.image" width="100" alt="">
+                                <h4>{{ team.name }}</h4>
+                                <h6 class="mb-3">{{ team.designation }}</h6>
+                                <p>{{ team.description}}</p>
                             </div>
                         </div>
                     </div>
