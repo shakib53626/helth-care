@@ -1,4 +1,5 @@
 <script setup>
+import { ServiceTeamSkeleton } from '@/components'
 import { useThemeSetting, useServiceTeam } from '@/stores';
 import { onMounted, ref } from 'vue';
 const themeSetting = useThemeSetting();
@@ -34,16 +35,21 @@ onMounted(() => {
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste possimus maiores quibusdam, aliquid esse velit.</p>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 mb-4" v-for="(team, index) in serviceTeams" :key="index">
-                        <div class="card">
-                            <div class="card-body" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
-                                <img :src="team.image" width="100" alt="">
-                                <h4>{{ team.name }}</h4>
-                                <h6 class="mb-3">{{ team.designation }}</h6>
-                                <p>{{ team.description}}</p>
+                    <template v-if="serviceTeam.loading">
+                        <ServiceTeamSkeleton/>
+                    </template>
+                    <template v-else>
+                        <div class="col-md-4 mb-4" v-for="(team, index) in serviceTeams" :key="index">
+                            <div class="card">
+                                <div class="card-body" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
+                                    <img :src="team.image" width="100" alt="">
+                                    <h4>{{ team.name }}</h4>
+                                    <h6 class="mb-3">{{ team.designation }}</h6>
+                                    <p>{{ team.description}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </div>
