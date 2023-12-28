@@ -4,6 +4,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import './style.css'
 import 'nprogress/nprogress.css'
 import "skeleton-screen-css";
+import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router'
 

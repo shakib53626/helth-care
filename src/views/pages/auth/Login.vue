@@ -1,7 +1,36 @@
 
 <script setup>
-import { useThemeSetting } from '@/stores';
+import { useThemeSetting, useAuth, useNotification } from '@/stores';
+import { ref } from 'vue';
+import router from '@/router';
+
 const themeSetting = useThemeSetting();
+
+import { Form, Field } from 'vee-validate';
+import * as yup from 'yup';
+
+const notification = useNotification();
+const auth         = useAuth();
+const showPassword = ref(false);
+
+const schema = yup.object({
+    phone_number: yup.string().required("Phone Number field is required").min(11),
+    password    : yup.string().required(),
+});
+
+const submit = async(values, {setErrors}) =>{
+    let res = await auth.login(values);
+    if(res.success){
+        router.push({name:'index'});
+        notification.Success("Login Success")
+    }else{
+        setErrors(res);
+    }
+}
+
+const isHide = async() =>{
+    showPassword.value = !showPassword.value
+}
 
 </script>
 
@@ -12,24 +41,47 @@ const themeSetting = useThemeSetting();
                 <div class="login-title text-center mb-4">
                     <h2 :class="{'white' : themeSetting.isDarkMode == 'dark'}">User Login</h2>
                 </div>
-                <form action="">
+                <Form @submit="submit" :validation-schema="schema" v-slot="{errors, isSubmitting}">
                     <div class="form-group">
-                        <label for="email" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Email</label>
-                        <input type="email" id="email" class="form-control" placeholder="Enter Email">
+                        <label for="phone" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Phone Number</label>
+                        <Field 
+                            type="phone" 
+                            id="phone" 
+                            name="phone_number" 
+                            class="form-control"
+                            :class="{'is-invalid' : errors.phone_number}" 
+                            placeholder="Enter Phone"
+                        />
+                        <span class="text-danger">{{errors.phone_number}}</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="position:relative;">
                         <label for="password" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Password</label>
-                        <input type="password" id="password" class="form-control" placeholder="Enter password">
+                        <Field 
+                            :type="showPassword ? 'text' : 'password'" 
+                            id="password" 
+                            class="form-control"
+                            :class="{'is-invalid' : errors.password}"  
+                            placeholder="Enter password" 
+                            name="password"    
+                        />
+                        <span class="text-danger">{{errors.password}}</span>
+                        <i  @click.prevent="isHide"
+                            :class="{
+                                'fas fa-eye eye_icon': !showPassword,
+                                'fas fa-eye-slash eye_icon': showPassword,
+                        }">
+                        </i>
                     </div>
                     <div class="d-flex justify-content-between">
                         <div>
                             <input type="checkbox" id="remember">
                             <label for="remember" class="ml-2" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Remember Me</label><br>
                         </div>
-                        <button class="btn btn-danger">Login</button>
+                        <button class="btn btn-danger" v-if="isSubmitting"><i class="fas fa-spinner fa-spin"></i> Loading...</button>
+                        <button class="btn btn-danger" type="submit" v-else>Login</button>
                     </div>
                     <router-link :to="{name : 'register'}">I don't have any account?</router-link>
-                </form>
+                </Form>
             </div>
         </div>
     </div>
@@ -54,4 +106,11 @@ const themeSetting = useThemeSetting();
         color: #a8a8a8;
      }
 
+     .eye_icon{
+        position: absolute;
+        top: 44px;
+        right: 30px;
+        color: #a8a8a8;
+        cursor: pointer;
+     }
 </style>

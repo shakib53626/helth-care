@@ -1,4 +1,5 @@
 import NProgress from 'nprogress'
+import { useAuth } from '@/stores'
 import {createRouter, createWebHistory} from 'vue-router'
 import Index from '@/views/pages/Index.vue'
 import AboutUs from '@/views/pages/About.vue'
@@ -14,44 +15,44 @@ const routes =[
       path: '/',
       name:'index',
       component: Index,
-      meta: { title: 'Home', guest: true }
+      meta: { title: 'Home'}
     },
     { 
       path: '/login',
       name:'login',
       component: Login,
-      meta: { title: 'Login', guest: true }
+      meta: { title: 'Login', guest : true}
     },
     { 
       path: '/register',
       name:'register',
       component: Register,
-      meta: { title: 'Register', guest: true }
+      meta: { title: 'Register', guest : true}
     },
     { 
       path: '/about-us',
       name:'about',
       component: AboutUs,
-      meta: { title: 'About Us', guest: true }
+      meta: { title: 'About Us'}
     },
     { 
       path: '/contact-us',
       name:'contact',
       component: ContactUs,
-      meta: { title: 'Contact Us', guest: true }
+      meta: { title: 'Contact Us'}
     },
     
     { 
       path: '/services',
       name:'services',
       component: AllServices,
-      meta: { title: 'All Services', guest: true }
+      meta: { title: 'All Services'}
     },
     { 
       path: '/service-details/:id',
       name:'service-details',
       component: ServiceDetails,
-      meta: { title: 'Service Details', guest: true }
+      meta: { title: 'Service Details'}
     },
   ];
 
@@ -69,23 +70,22 @@ const DEFAULT_TITLE = "404";
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || DEFAULT_TITLE;
   NProgress.start();
-  next();
-  // const loggedIn = useAuth();
-  // if(to.matched.some((record) => record.meta.requiresAuth)){
-  //   if(!loggedIn.user.meta){
-  //     next({name:"login"});  
-  //   }else{
-  //     next();
-  //   }
-  // }else if(to.matched.some((record) => record.meta.guest)){
-  //   if(loggedIn.user.meta){
-  //     next({name:"my-account"});  
-  //   }else{
-  //     next();
-  //   }
-  // }else{
-  //   next();
-  // }
+  const loggedIn = useAuth();
+  if(to.matched.some((record) => record.meta.requiresAuth)){
+    if(!loggedIn.user.meta){
+      next({name:"login"});  
+    }else{
+      next();
+    }
+  }else if(to.matched.some((record) => record.meta.guest)){
+    if(loggedIn.user.meta){
+      next({name:"index"});  
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
 })
 router.afterEach(() => {
   NProgress.done()

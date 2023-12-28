@@ -47,10 +47,10 @@ onMounted(() => {
                                     <h6 class="mb-3">{{ team.designation }}</h6>
                                     <p>{{ team.description}}</p>
                                     <div class="social-icon">
-                                        <i class="fa-brands fa-facebook-f" style="color:#0775E2;"></i>
-                                        <i class="fa-brands fa-twitter" style="color:#00B2E5;"></i>
-                                        <i class="fa-brands fa-whatsapp" style="color:#40A84D;"></i>
-                                        <i class="fa-brands fa-linkedin-in" style="color:#0A63BC;"></i>
+                                        <i class="fa-brands fa-facebook-f" style="color:#0775E2; cursor:pointer;"></i>
+                                        <i class="fa-brands fa-twitter" style="color:#00B2E5; cursor:pointer;"></i>
+                                        <i class="fa-brands fa-whatsapp" style="color:#40A84D; cursor:pointer;"></i>
+                                        <i class="fa-brands fa-linkedin-in" style="color:#0A63BC; cursor:pointer;"></i>
                                     </div>
                                 </div>
                             </div>

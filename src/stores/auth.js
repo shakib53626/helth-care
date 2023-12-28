@@ -4,40 +4,50 @@ import { useToken } from '@/stores'
 
 export const useAuth = defineStore("auth", {
     state:() => ({
-        user : {},
-        isLoggedIn : false,
-        logoutLoading : false,
+        user         : {},
+        loading      : false,
+        logoutLoading: false,
      }),
 
-     persist:['user', 'isLoggedIn'],
+     persist:['user'],
 
      getters:{
         getUser:(state) => {
             return state.user?.data;
         },
-        getAuthStatus: (state) => {
-            return state.isLoggedIn;
-        }
      },
 
      actions:{
         async login(data){
             const token = useToken();
             try {
-                const res = await axiosInstance.post('/admin/login', data);
+                const res = await axiosInstance.post('/login', data);
+                console.log(res);
                 if(res.status === 200){
-                    this.user = res.data?.result?.user
-                    token.setToken(res.data?.result?.token)
-                    this.isLoggedIn = true;
+                    this.user = res.data?.result?.user;
+                    token.setToken(res.data?.result?.token);
 
-                    return res.data?.result;
-                }else{
-                    return res.data?.message;
+                    return res.data;
+                }
+
+            } catch (error) {
+                if(error.response?.data){
+                    return error.response?.data?.errors;
+                }
+            }
+        },
+
+        async register(formData){
+            this.loading = true;
+            try {
+                const res = await axiosInstance.post('/registration', formData);
+                if(res.status == 200){
+                    return res.data;
                 }
             } catch (error) {
-                if(error.response.data){
-                    throw(error.response.data.errors)
-                }
+                return error.response?.data;
+            }finally{
+                this.loading = false;
             }
         },
 

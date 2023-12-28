@@ -62,8 +62,8 @@ onMounted(() => {
                                             <div class="col-md-8 d-flex align-items-center" style="height: 400px;">
                                                 <div class="">
                                                     <h3 class="text-light">{{ slider.title }}</h3>
-                                                    <p class="mb-4 text-light" style="font-size:18px;">At State Care, we are experts in supplying a wide variety of healthcare professionals to a diverse range of clients, including hospitals and care homes. </p>
-                                                    <button class="btn btn-danger">All Services</button>
+                                                    <p class="mb-4 text-light" style="font-size:18px;">{{ slider.description }}</p>
+                                                    <a :href="slider.link" class="btn btn-danger">Click View</a>
                                                 </div>
                                             </div>
                                             <div class="col-md-4"></div>
