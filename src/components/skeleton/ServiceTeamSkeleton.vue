@@ -20,6 +20,9 @@
                 <div class="ssc-line mb-2"></div>
                 <div class="ssc-line mb-2"></div>
                 <div class="ssc-line mb-2"></div>
+                <div class="ssc-line mb-2"></div>
+                <div class="ssc-line mb-2"></div>
+                <div class="ssc-line mb-2"></div>
             </div>
         </div>
     </div>

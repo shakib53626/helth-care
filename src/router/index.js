@@ -6,6 +6,9 @@ import ContactUs from '@/views/pages/Contact.vue'
 import Login from '@/views/pages/auth/Login.vue' 
 import Register from '@/views/pages/auth/Register.vue' 
 
+import AllServices from '@/views/pages/Services.vue' 
+import ServiceDetails from '@/views/pages/ServiceDetails.vue' 
+
 const routes =[	
     { 
       path: '/',
@@ -36,6 +39,19 @@ const routes =[
       name:'contact',
       component: ContactUs,
       meta: { title: 'Contact Us', guest: true }
+    },
+    
+    { 
+      path: '/services',
+      name:'services',
+      component: AllServices,
+      meta: { title: 'All Services', guest: true }
+    },
+    { 
+      path: '/service-details/:id',
+      name:'service-details',
+      component: ServiceDetails,
+      meta: { title: 'Service Details', guest: true }
     },
   ];
 

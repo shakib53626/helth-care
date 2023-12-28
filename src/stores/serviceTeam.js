@@ -14,7 +14,6 @@ export const useServiceTeam = defineStore("serviceTeam", {
             this.loading = true;
             try {
                 const res = await axiosInstance.get('/teams');
-                console.log(res);
                 if(res.status === 200){
                     this.serviceTeams = res.data?.result
                     return res.data;

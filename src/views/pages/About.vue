@@ -42,10 +42,16 @@ onMounted(() => {
                         <div class="col-md-4 mb-4" v-for="(team, index) in serviceTeams" :key="index">
                             <div class="card">
                                 <div class="card-body" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
-                                    <img :src="team.image" width="100" alt="">
-                                    <h4>{{ team.name }}</h4>
+                                    <img :src="team.image" width="130" alt="">
+                                    <h4 class="mt-4">{{ team.name }}</h4>
                                     <h6 class="mb-3">{{ team.designation }}</h6>
                                     <p>{{ team.description}}</p>
+                                    <div class="social-icon">
+                                        <i class="fa-brands fa-facebook-f" style="color:#0775E2;"></i>
+                                        <i class="fa-brands fa-twitter" style="color:#00B2E5;"></i>
+                                        <i class="fa-brands fa-whatsapp" style="color:#40A84D;"></i>
+                                        <i class="fa-brands fa-linkedin-in" style="color:#0A63BC;"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -140,5 +146,14 @@ onMounted(() => {
 }
 .transparent{
     background: transparent;
+}
+.social-icon i{
+    background-color: #fff;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 4px;
+    margin-left: 10px;
 }
 </style>

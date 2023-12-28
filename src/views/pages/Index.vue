@@ -237,46 +237,7 @@ onMounted(() => {
 .swiper-slide{
     height: 100%;
 }
-.service-box{
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-}
-.service-box::before{
-    content: '';
-    position: absolute;
-    background-color: #CA0F20;
-    width: 100%;
-    height: 28%;
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-    left: 0;
-    top: 0;
-    transition: 0.5s;
-}
 
-.service-box:hover::before{
-    height: 100%;
-    border-radius: 0;
-    transition: 0.5s;
-}
-.service-box:hover button{
-    background-color: #fff;
-    color: #CA0F20;
-    transition: 0.5s;
-}
-.service-content{
-    position: relative;
-    z-index: 9;
-}
-.service-content h3{
-    padding-bottom: 20px;
-}
-.service-box img{
-    max-width: 100%;
-    margin-top: 50px;
-}
 .care-section{
     position: relative;
 }
