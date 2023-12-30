@@ -1,13 +1,15 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
-import { useThemeSetting, useHomeSlider } from '@/stores'
-import { SliderSkeleton } from '@/components'
+import { useThemeSetting, useHomeSlider, useServices } from '@/stores'
+import { SliderSkeleton, ServicesSkeleton } from '@/components'
 
+const service      = useServices();
 const slider       = useHomeSlider();
 const themeSetting = useThemeSetting();
 const isDarkMode   = ref(themeSetting.isDarkMode);
 
-const sliders   = ref({});
+const sliders  = ref({});
+const services = ref({});
 
 const getSliders = async() =>{
     const res = await slider.getSliders();
@@ -15,6 +17,13 @@ const getSliders = async() =>{
         sliders.value = res.result;
     }
 } 
+
+const getServices = async(page=1) =>{
+    const res = await service.getServices(page, 6);
+    if(res.success){
+        services.value = res.result
+    }
+}
 
 watch(() => themeSetting.isDarkMode, (newValue) => {
   isDarkMode.value = newValue;
@@ -29,6 +38,7 @@ const modules = ref([Navigation, Pagination, Mousewheel, Keyboard, Autoplay]);
 
 onMounted(() => {
     getSliders();
+    getServices();
 })
 </script>
 <template>
@@ -84,60 +94,23 @@ onMounted(() => {
                     <p :class="{'white' : isDarkMode=='dark'}">State Care provides exceptional personal care services that allow our clients to continue living within the comfort of their homes. We are proud to be widely recognised as one of the best staff suppliers in our industry.</p>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="white mb-4">Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <button class="btn btn-danger mt-4">Find Out More</button>
+                    <template v-if="service.loading">
+                        <ServicesSkeleton/>
+                    </template>
+                    <template v-else>
+                        <div class="col-md-4 mb-4" v-for="(service, index) in services?.data" :key="index">
+                            <div class="service-box">
+                                <div class="service-content">
+                                    <h3 class="white mb-4">{{ service.title }}</h3>
+                                    <img :src="service.banner_image" alt="">
+                                    <router-link :to="{name: 'service-details', params : {id:service.id} }" class="btn btn-danger mt-4">View Details</router-link>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <button class="btn btn-danger mt-4">Find Out More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <button class="btn btn-danger mt-4">Find Out More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <button class="btn btn-danger mt-4">Find Out More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <button class="btn btn-danger mt-4">Find Out More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <button class="btn btn-danger mt-4">Find Out More</button>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
+                </div>
+                <div class="row mt-4">
+                    <router-link :to="{name:'services'}" class="btn btn-danger btn-lg m-auto">See More</router-link>
                 </div>
             </div>
         </section>

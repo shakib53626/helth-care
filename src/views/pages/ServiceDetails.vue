@@ -1,17 +1,34 @@
 <script setup>
-import { useThemeSetting } from '@/stores';
+import { useThemeSetting, useServices } from '@/stores';
+import { onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router';
 
 const themeSetting = useThemeSetting();
+
+const route          = useRoute();
+const service        = useServices();
+const serviceDetails = ref({});
+
+const getSingleService = async() =>{
+    const res = await service.getSingleService(route.params.id);
+    if(res.success){
+        serviceDetails.value = res.result
+    }
+}
+
+onMounted(() => {
+    getSingleService();
+})
 </script>
 
 <template>
     <div>
         <!-- <div class="container my-4"> -->
         <div class="container mt-4">
-            <div class="page-single-banner" style="background-image: url('http://localhost:5173/src/assets/images/banner/banner3.jpg');padding:100px 0;">
+            <div class="page-single-banner" :style="'background-image: url('+ serviceDetails.banner_image +');padding:100px 0;'">
                 <div class="text-center" style="position:relative;z-index:9;">
-                    <h1 class="white">About Service</h1>
-                    <h4 class="white">Domiciliary Care Services</h4>
+                    <h1 class="white">Service Details</h1>
+                    <h4 class="white">{{ serviceDetails.title }}</h4>
                 </div>
             </div>
         </div>
@@ -21,10 +38,8 @@ const themeSetting = useThemeSetting();
                 <div class="row">
                     <div class="col-md-6" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
                         <div class="about-team-title" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
-                            <h3>About Our Team</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium at obcaecati nisi dolor atque porro ipsam mollitia tenetur, numquam commodi ab fuga consequatur pariatur quae dicta, nemo accusamus incidunt, nesciunt iure minus vitae voluptatibus? Nobis animi voluptatum iure, eius ex, id maiores dolorum nisi reprehenderit dolor optio asperiores quasi placeat error hic nulla minus, dicta facilis laboriosam necessitatibus fugiat rerum aliquam excepturi debitis? Sunt, maxime quo! Cumque rem culpa labore quos, quibusdam aspernatur nisi. Repudiandae, unde. Facilis dicta ducimus quidem!</p>
+                            <p>{{ serviceDetails.short_description_1 }}</p>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate voluptas iusto expedita odio molestias, nemo nulla, numquam quisquam suscipit officiis velit ipsum impedit pariatur quos esse rem magni corporis ducimus!</p>
                     </div>
                     <div class="col-md-6">
                         <img src="@/assets/images/service/service1.jpg" alt="">

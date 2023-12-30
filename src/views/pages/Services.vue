@@ -1,7 +1,33 @@
 <script setup>
-import { useThemeSetting } from '@/stores';
+import { ServicesSkeleton } from '@/components'
+import { useThemeSetting, useServices } from '@/stores';
+import { onMounted, ref } from 'vue'
 
 const themeSetting = useThemeSetting();
+
+const service  = useServices();
+const searchQuery = ref('');
+const paginateSize = ref(24);
+const services = ref({});
+
+const getServices = async(page=1) =>{
+    const res = await service.getServices(page, paginateSize.value, searchQuery.value);
+    if(res.success){
+        services.value = res.result
+    }
+}
+
+const searchData = () =>{
+    getServices();
+}
+
+const paginateSizeWiseData = () =>{
+    getServices();
+}
+
+onMounted(() => {
+    getServices();
+})
 </script>
 
 <template>
@@ -19,153 +45,32 @@ const themeSetting = useThemeSetting();
                 <div class="section-header d-flex justify-content-between">
                     <div class="form-group d-flex align-items-center" style="width: 350px;" :class="{'white': themeSetting.isDarkMode == 'dark'}">
                         <label for="search-service" >Search : </label>
-                        <input type="text" style="width:250px;" class="form-control ml-2" placeholder="Enter your search key....">
+                        <input type="text" style="width:250px;" class="form-control ml-2" placeholder="Enter your search key...." v-model="searchQuery" @input="searchData">
                     </div>
                     <div class="form-group d-flex align-items-center" style="width: 200px;" :class="{'white': themeSetting.isDarkMode == 'dark'}">
                         <label for="sort">Sort : </label>
-                        <select name="paginate" id="sort" class="form-control ml-2" style="width:100px;">
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+                        <select name="paginate" id="sort" class="form-control ml-2" style="width:100px;" v-model="paginateSize" @change="paginateSizeWiseData">
+                            <option value="24">24</option>
+                            <option value="48">48</option>
+                            <option value="96">96</option>
                         </select>
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="white mb-4">Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
+                    <template v-if="service.loading">
+                        <ServicesSkeleton/>
+                    </template>
+                    <template v-else>
+                        <div class="col-md-4 mb-4" v-for="(service, index) in services?.data" :key="index">
+                            <div class="service-box">
+                                <div class="service-content">
+                                    <h3 class="white mb-4">{{ service.title }}</h3>
+                                    <img :src="service.banner_image" alt="">
+                                    <router-link :to="{name: 'service-details', params : {id:service.id} }" class="btn btn-danger mt-4">View Details</router-link>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="service-box">
-                            <div class="service-content">
-                                <h3 class="text-light mb-4" >Domiciliary Care Services</h3>
-                                <img src="@/assets/images/service/service1.jpg" alt="">
-                                <router-link :to="{name: 'service-details', params : { id : 1} }" class="btn btn-danger mt-4">Find Out More</router-link>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </section>
@@ -173,7 +78,7 @@ const themeSetting = useThemeSetting();
 </template>
 
 
-<style scoped>
+<style>
 .page-single-banner{
     padding: 20px 0;
     background-position: center center;
