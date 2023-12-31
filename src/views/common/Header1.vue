@@ -49,11 +49,11 @@ onBeforeUnmount(() => {
                     <div class="contact_links">
                         <div class="contact_icon">
                             <i class="fa-solid fa-envelope danger"></i>
-                            <a class="text-dark" :class="{'white' : themeSetting.isDarkMode=='dark'}" href="mailto:sudipbhowmick80@gmail.com"> sudipbhowmick80@gmail.com</a>
+                            <a class="text-dark" :class="{'white' : themeSetting.isDarkMode=='dark'}" href="mailto:sudipbhowmick80@gmail.com"> homestaycare@gmail.com</a>
                         </div>
                         <div class="contact_icon">
                             <i class="fa-solid fa-phone danger"></i>
-                            <a class="text-dark" :class="{'white' : themeSetting.isDarkMode=='dark'}" href="tel:918898244769"> +91 88982447698</a>
+                            <a class="text-dark" :class="{'white' : themeSetting.isDarkMode=='dark'}" href="tel:918898244769"> +91 00000000000</a>
                         </div>
                     </div>
                     <div class="social_links">

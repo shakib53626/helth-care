@@ -14,7 +14,7 @@ const auth         = useAuth();
 const showPassword = ref(false);
 
 const schema = yup.object({
-    phone_number: yup.string().required("Phone Number field is required").min(11),
+    email: yup.string().required("Email field is required").min(11),
     password    : yup.string().required(),
 });
 
@@ -43,16 +43,16 @@ const isHide = async() =>{
                 </div>
                 <Form @submit="submit" :validation-schema="schema" v-slot="{errors, isSubmitting}">
                     <div class="form-group">
-                        <label for="phone" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Phone Number</label>
+                        <label for="phone" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Email</label>
                         <Field 
                             type="phone" 
                             id="phone" 
-                            name="phone_number" 
+                            name="email" 
                             class="form-control"
-                            :class="{'is-invalid' : errors.phone_number}" 
-                            placeholder="Enter Phone"
+                            :class="{'is-invalid' : errors.email}" 
+                            placeholder="Enter Email"
                         />
-                        <span class="text-danger">{{errors.phone_number}}</span>
+                        <span class="text-danger">{{errors.email}}</span>
                     </div>
                     <div class="form-group" style="position:relative;">
                         <label for="password" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Password</label>
