@@ -7,8 +7,9 @@ import { storeToRefs } from 'pinia';
 
 const themeSetting = useThemeSetting();
 
-const isOpen = ref('');
-const isDarkMode  = ref('');
+const isOpen     = ref('');
+const isOpenChat = ref('');
+const isDarkMode = ref('');
 
 const settingOpen = () => {
   isOpen.value = !isOpen.value;
@@ -42,6 +43,10 @@ const negativeContrastMode = () => {
   updateStyles(); 
 };
 
+const chatOpen = () =>{
+  isOpenChat.value = !isOpenChat.value
+}
+
 const increaseFontSize = () => {
   const currentFontSize = parseFloat(document.documentElement.style.fontSize || '18px');
   const newFontSize = currentFontSize * 1.5;
@@ -68,6 +73,22 @@ const updateStyles = () => {
   }
 };
 
+const connectWhatsApp = () =>{
+  const phoneNumber = "+8801580663349";
+  const whatsappLink = `https://wa.me/${phoneNumber}`;
+  window.open(whatsappLink, "_blank");
+}
+
+const connectPhone = () =>{
+  const phoneNumber = "+8801580663349";
+  const phoneLink = `tel:${phoneNumber}`;
+  window.location.href = phoneLink;
+}
+const connectMessenger = () =>{
+  const messengerLink = "https://www.facebook.com/messages/t/shakibul5362";
+  window.open(messengerLink, "_blank");
+}
+
 watch(isDarkMode, () => {
   updateStyles();
 });
@@ -93,7 +114,7 @@ onMounted(() => {
     </div>
     <div class="web-setting" @click.prevent="settingOpen">
       <div class="setting-icon" :class="{'setting-open' : isOpen, 'gray-slider' : themeSetting.isDarkMode=='gray', 'contrast' : themeSetting.isDarkMode == 'contrast'}" >
-        <i class="fa-solid fa-gears text-light" style="font-size: 20px;width:100%;"> <span class="ms-2 pl-2" v-if="isOpen">Accessibility</span></i>
+        <i class="fa-solid fa-gears text-light" style="font-size: 20px;width:100%;"> <span class="ms-2 pl-2" :class="{ 'opacity' : !isOpen }">Accessibility</span></i>
         <ul v-if="isOpen" class="bg-light">
           <li @click.prevent="increaseFontSize" style="font-size:20px;"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom Text</li>
           <li @click.prevent="decreaseFontSize" style="font-size:20px;"><i class="fa-solid fa-magnifying-glass-minus"></i> Zoom Out Text</li>
@@ -105,10 +126,76 @@ onMounted(() => {
         </ul>
       </div>
     </div>
+    <div class="social-contact">
+        <ul class="chat-item" :class="{ 'openChatItems' : isOpenChat }">
+          <li class="phone" @click.prevent="connectPhone"><i class="fa-solid fa-phone"></i></li>
+          <li class="whatsapp" @click.prevent="connectWhatsApp"><i class="fa-brands fa-whatsapp"></i></li>
+          <li class="messenger" @click.prevent="connectMessenger"><i class="fa-brands fa-facebook-messenger"></i></li>
+        </ul>
+      <div class="message-icon" @click.prevent="chatOpen">
+        <i class="fa-solid fa-xmark text-light" style="font-size: 20px;width:100%;" v-if="isOpenChat"></i>
+        <i class="fa-regular fa-comment-dots text-light" style="font-size: 20px;width:100%;" v-else></i>
+      </div>
+      <div class="chat-text text-danger">
+        Live Chat
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.chat-item{
+    position: fixed;
+    bottom: 34px;
+    right: 50px;
+    z-index: 9;
+    transition: 0.5s;
+}
+.openChatItems li{
+  position: relative;
+  transition: 0.5s;
+}
+.openChatItems li:nth-child(1) {
+  margin-bottom: 60px;
+}
+
+.openChatItems li:nth-child(2) {
+  margin-bottom: 120px;
+}
+.openChatItems li:nth-child(3) {
+  margin-bottom: 180px;
+}
+.openChatItems li:nth-child(4) {
+  margin-bottom: 240px;
+}
+.chat-item li{
+  list-style: none;
+  width: 50px;
+  height: 50px;
+  line-height: 55px;
+  text-align: center;
+  color: #fff;
+  border-radius: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.phone,
+.whatsapp{
+  background-color: #02B43C;
+}
+.messenger{
+  background-color: #01A0F7;
+}
+.chat-item li i{
+  font-size: 24px;
+}
+.opacity{
+  opacity: 0;
+  transition: 0.5s;
+}
 .web-setting .setting-icon{
     width: 50px;
     height: 50px;
@@ -121,6 +208,28 @@ onMounted(() => {
     z-index: 99;
     cursor: pointer;
     transition: 0.5s;
+}
+.social-contact .message-icon{
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #CA0F20;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 99;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 100%;
+    border: 2px solid #fff;
+}
+.social-contact .chat-text{
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    z-index: 99;
+    font-weight: 700;
 }
 .fa-gears{
   padding: 0 10px;

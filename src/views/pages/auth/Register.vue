@@ -45,8 +45,8 @@ const submit = async() =>{
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="first_name" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Name <span class="text-danger">*</span></label>
-                                <input type="first_name" id="first_name" class="form-control" placeholder="Enter name" v-model="name">
+                                <label for="first_name" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Username <span class="text-danger">*</span></label>
+                                <input type="first_name" id="first_name" class="form-control" placeholder="Enter Username" v-model="name">
                                 <span class="text-danger" v-for="(error, index) in errors?.name" :key="index">{{ error }}</span>
                             </div>
                         </div>
