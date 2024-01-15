@@ -47,7 +47,7 @@ onMounted(() => {
                 </div>
             </div>
         </div>
-        <div class="our-team my-4">
+        <div class="our-team my-4" :class="{'transparent' : themeSetting.isDarkMode == 'dark'}">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
@@ -65,7 +65,7 @@ onMounted(() => {
         <div class="about-service">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
                         <p v-html="serviceDetails.description"></p>
                     </div>
                 </div>

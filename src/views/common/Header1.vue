@@ -1,12 +1,22 @@
 <script setup>
+import { useSocialContact } from '@/stores'
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useThemeSetting } from '@/stores';
 import { useRoute } from 'vue-router';
 
-const route = useRoute()
-const themeSetting = useThemeSetting();
+const route         = useRoute()
+const themeSetting  = useThemeSetting();
+const socialContact = useSocialContact();
 
-const burger = ref(false);
+const burger        = ref(false);
+const contactInfo   = ref('');
+
+const getSocialContact = async() =>{
+    const res = await socialContact.getSocialContacts();
+    if(res.success){
+        contactInfo.value = res.result;
+    }
+}
 
 const burgerButton = () => {
   burger.value = !burger.value;
@@ -25,6 +35,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+    getSocialContact();
     window.addEventListener('scroll', handleScroll);
 });
 
@@ -47,23 +58,29 @@ onBeforeUnmount(() => {
                 <div class="d_flex gap_26">
                     <div class="d_flex gap_26">
                     <div class="contact_links">
-                        <div class="contact_icon">
-                            <i class="fa-solid fa-envelope danger"></i>
-                            <a class="text-dark" :class="{'white' : themeSetting.isDarkMode=='dark'}" href="mailto:sudipbhowmick80@gmail.com"> homestaycare@gmail.com</a>
-                        </div>
-                        <div class="contact_icon">
-                            <i class="fa-solid fa-phone danger"></i>
-                            <a class="text-dark" :class="{'white' : themeSetting.isDarkMode=='dark'}" href="tel:918898244769"> +91 00000000000</a>
-                        </div>
+                        <template v-for="(email, index) in contactInfo.data" :key="index">
+                            <div class="contact_icon" v-if="email.type == 'Email'">
+                                <i class="fa-solid fa-envelope danger"></i>
+                                <a class="text-dark" :class="{'white' : themeSetting.isDarkMode=='dark'}" :href="'mailto:'+ email.contact +''">{{ email.contact }}</a>
+                            </div>
+                        </template>
+                        <template v-for="(phone, index) in contactInfo.data" :key="index">
+                            <div class="contact_icon" v-if="phone.type == 'Phone'">
+                                <i class="fa-solid fa-phone danger"></i>
+                                <a class="text-dark" :class="{'white' : themeSetting.isDarkMode=='dark'}" :href="'tel:'+ phone.contact +''">{{ phone.contact }}</a>
+                            </div>
+                        </template>
                     </div>
                     <div class="social_links">
-                        <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                    </div>
+                            <template v-for="(social, index) in contactInfo.data" :key="index">
+                                <a :href="social.contact" target="_blank" v-if="social.type == 'Linkedin'"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a :href="social.contact" target="_blank" v-if="social.type == 'Facebook'"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a :href="social.contact" target="_blank" v-if="social.type == 'Youtube'"><i class="fa-brands fa-youtube"></i></a>
+                            </template>
+                        </div>
                     </div>
                     <div class="header_cta">
-                        <router-link :to="{name : 'login'}" class="btn_one">Login</router-link>
+                        <router-link :to="{name : 'login'}" class="btn_one">Apply Now</router-link>
                     </div>
 
                     <button type="button" class="burger" :class="{'active' : burger}" id="burger" @click.prevent="burgerButton">

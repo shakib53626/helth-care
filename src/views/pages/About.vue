@@ -46,12 +46,6 @@ onMounted(() => {
                                     <h4 class="mt-4">{{ team.name }}</h4>
                                     <h6 class="mb-3">{{ team.designation }}</h6>
                                     <p>{{ team.description}}</p>
-                                    <div class="social-icon">
-                                        <i class="fa-brands fa-facebook-f" style="color:#0775E2; cursor:pointer;"></i>
-                                        <i class="fa-brands fa-twitter" style="color:#00B2E5; cursor:pointer;"></i>
-                                        <i class="fa-brands fa-whatsapp" style="color:#40A84D; cursor:pointer;"></i>
-                                        <i class="fa-brands fa-linkedin-in" style="color:#0A63BC; cursor:pointer;"></i>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -65,9 +59,11 @@ onMounted(() => {
                     <div class="col-md-6" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
                         <div class="about-team-title" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
                             <h3>About Our Team</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium at obcaecati nisi dolor atque porro ipsam mollitia tenetur, numquam commodi ab fuga consequatur pariatur quae dicta, nemo accusamus incidunt, nesciunt iure minus vitae voluptatibus? Nobis animi voluptatum iure, eius ex, id maiores dolorum nisi reprehenderit dolor optio asperiores quasi placeat error hic nulla minus, dicta facilis laboriosam necessitatibus fugiat rerum aliquam excepturi debitis? Sunt, maxime quo! Cumque rem culpa labore quos, quibusdam aspernatur nisi. Repudiandae, unde. Facilis dicta ducimus quidem!</p>
+                            <p>What sets Homestay apart is our amazing team devoted to responsive home care. Our nurses, therapists, drivers, and coordinators choose this work because they love bringing care into homes and developing trusted relationships with clients along their healthcare journeys. Recognition of our staff’s compassion comes from consistently positive patient survey feedback. We invest extensively in continuing education and training to ensure our team delivers creative, effective solutions with patience and kindness at their core. 
+
+                                If you or a loved one need individualized home healthcare, choose Homestay for an experience that prioritizes comfort.
+                            </p>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate voluptas iusto expedita odio molestias, nemo nulla, numquam quisquam suscipit officiis velit ipsum impedit pariatur quos esse rem magni corporis ducimus!</p>
                     </div>
                     <div class="col-md-6">
                         <iframe width="100%" height="315" src="https://www.youtube.com/embed/DublqkOSBBA?si=K0NcBdRKfRPdBSII" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
