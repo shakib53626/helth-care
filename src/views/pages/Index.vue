@@ -71,9 +71,9 @@ onMounted(() => {
                                         <div class="row" style="padding: 0 50px;">
                                             <div class="col-md-8 d-flex align-items-center" style="height: 400px;">
                                                 <div class="">
-                                                    <h3 class="text-light" v-show="slider.title != 'null'">{{ slider.title }}</h3>
-                                                    <p class="mb-4 text-light" style="font-size:18px;" v-show="slider.description != 'null'">{{ slider.description }}</p>
-                                                    <a :href="slider.link" class="btn btn-danger" v-show="slider.link && slider.link != 'null'">Click View</a>
+                                                    <h3 class="text-light" v-show="slider.title != 'null' && slider.title != 'undefined'">{{ slider.title }}</h3>
+                                                    <p class="mb-4 text-light" style="font-size:18px;" v-show="slider.description != 'null' && slider.description != 'undefined'">{{ slider.description }}</p>
+                                                    <a :href="slider.link" class="btn btn-danger" v-show="slider.link && slider.link != 'null' && slider.link != 'undefined'">Click View</a>
                                                 </div>
                                             </div>
                                             <div class="col-md-4"></div>

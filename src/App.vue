@@ -93,20 +93,11 @@ const connectPhone = (number) =>{
   const phoneLink = `tel:${phoneNumber}`;
   window.location.href = phoneLink;
 }
-const connectMessenger = (messengerLink) =>{
-  const messengerLinkIOS = "fb-messenger://user-thread/shakibul5362";
-  // For Android devices
-  const messengerLinkAndroid = "fb-messenger://user/123456789"; // Replace 123456789 with the user's Facebook ID
+const connectMessenger = (messengerUsername) =>{
 
-  // Check if the user is using iOS or Android
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  
-  // Open the Messenger app
-  if (isIOS) {
-    window.open(messengerLinkIOS, "_blank");
-  } else {
-    window.location.href = messengerLinkAndroid;
-  }
+  const messengerLink = `https://www.facebook.com/messages/t/${messengerUsername}`; // Replace with your actual username or user ID
+  window.open(messengerLink, "_blank");
+
 }
 
 watch(isDarkMode, () => {
@@ -151,7 +142,7 @@ onMounted(() => {
         <ul class="chat-item" :class="{ 'openChatItems' : isOpenChat }">
           <template v-for="(social, index) in contactInfo.data" :key="index">
             <li class="phone" @click.prevent="connectPhone(social.contact)" v-if="social.type=='Phone'"><i class="fa-solid fa-phone"></i></li>
-            <li class="whatsapp" @click.prevent="connectWhatsApp(social.contact)" v-if="social.type=='WhatsApp'"><i class="fa-brands fa-whatsapp"></i></li>
+            <li class="whatsapp" @click.prevent="connectWhatsApp(social.contact)" v-if="social.type=='Whatsapp'"><i class="fa-brands fa-whatsapp"></i></li>
             <li class="messenger" @click.prevent="connectMessenger(social.contact)" v-if="social.type=='Messenger'"><i class="fa-brands fa-facebook-messenger"></i></li>
           </template>
         </ul>
