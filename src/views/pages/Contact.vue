@@ -1,6 +1,27 @@
 <script setup>
-import { useThemeSetting } from '@/stores';
-const themeSetting = useThemeSetting();
+import { useThemeSetting, useSocialContact } from '@/stores';
+import { onMounted, ref } from 'vue';
+
+const themeSetting  = useThemeSetting();
+const socialContact = useSocialContact();
+const contactInfo   = ref('');
+
+const getSocialContact = async() =>{
+    const res = await socialContact.getSocialContacts();
+    if(res.success){
+        contactInfo.value = res.result;
+    }
+}
+
+const connectWhatsApp = (whatsAppNumber) =>{
+  const phoneNumber = whatsAppNumber;
+  const whatsappLink = `https://wa.me/${phoneNumber}`;
+  window.open(whatsappLink, "_blank");
+}
+
+onMounted(() => {
+    getSocialContact();
+});
 </script>
 
 <template>
@@ -19,24 +40,28 @@ const themeSetting = useThemeSetting();
                     <div class="colmun-30 get_say_form">
                         <h5>Say Hi!</h5>
                         <ul class="get_say_info_sec" style="margin-bottom: 100px;">
-                            <li>
+                          <template v-for="(social, index) in contactInfo.data" :key="index">
+                            <li v-if="social.type == 'Email'">
                                 <i class="fa fa-envelope"></i>
-                                <a href="mailto:">info@stackfindover.com</a>
+                                <a :href="'mailto:'+ social.contact +''">{{ social.contact }}</a>
                             </li>
-                            <li>
+                            <li @click="connectWhatsApp(social.contact)" v-if="social.type == 'Whatsapp'">
                                 <i class="fa-brands fa-whatsapp"></i>
-                                <a href="tel:">+91 9602381997</a>
+                                <a href="javascript::void(0)">{{ social.contact }}</a>
                             </li>
-                            <li>
-                                <i class="fa-brands fa-skype"></i>
-                                <a href="#">Stackfindover</a> 
+                            <li v-if="social.type == 'Phone'">
+                                <i class="fa-solid fa-phone"></i>
+                                <a :href="'tel:'+ social.contact +''">{{ social.contact }}</a> 
                             </li>
+                          </template>
                         </ul>  
                         <ul class="get_say_social-icn">
-                            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                          <template v-for="(social, index) in contactInfo.data" :key="index">
+                            <li v-if="social.type == 'Phone'"><a :href="social.contact" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                            <li v-if="social.type == 'Instagram'"><a :href="social.contact"><i class="fa-brands fa-instagram"></i></a></li>
+                            <li v-if="social.type == 'Twitter'"><a :href="social.contact"><i class="fa-brands fa-twitter"></i></a></li>
+                            <li v-if="social.type == 'Linkedin'"><a :href="social.contact"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                          </template>
                         </ul>          
                     </div> 
                     <div class="colmun-70 get_form">

@@ -8,7 +8,9 @@ import Login from '@/views/pages/auth/Login.vue'
 import Register from '@/views/pages/auth/Register.vue' 
 
 import AllServices from '@/views/pages/Services.vue' 
-import ServiceDetails from '@/views/pages/ServiceDetails.vue' 
+import ServiceDetails from '@/views/pages/ServiceDetails.vue'
+
+import ApplyForm from '@/views/pages/ApplyForm.vue' 
 
 const routes =[	
     { 
@@ -53,6 +55,12 @@ const routes =[
       name:'service-details',
       component: ServiceDetails,
       meta: { title: 'Service Details'}
+    },
+    { 
+      path: '/apply-form',
+      name:'apply-form',
+      component: ApplyForm,
+      meta: { title: 'Apply Form'}
     },
   ];
 

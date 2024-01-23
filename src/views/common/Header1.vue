@@ -80,7 +80,7 @@ onBeforeUnmount(() => {
                         </div>
                     </div>
                     <div class="header_cta">
-                        <router-link :to="{name : 'login'}" class="btn_one">Apply Now</router-link>
+                        <router-link :to="{name : 'apply-form'}" class="btn_one">Apply Now</router-link>
                     </div>
 
                     <button type="button" class="burger" :class="{'active' : burger}" id="burger" @click.prevent="burgerButton">
