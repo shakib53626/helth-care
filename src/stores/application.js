@@ -30,9 +30,20 @@ export const useApplication = defineStore("application", {
                 console.log(error);
             }
         },
+        
+        async getCities(){
+            try {
+                const res = await axiosInstance.get('/cities');
+                if(res.data?.success){
+                    return res.data;
+                }
+                console.log(res);
+            } catch (error) {
+                console.log(error);
+            }
+        },
 
         async insert(formData){
-            console.log(formData);
             this.loading = true;
             try {
                 const res = await axiosInstance.post('/applications', formData);

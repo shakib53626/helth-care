@@ -7,6 +7,7 @@ const application  = useApplication();
 const imagePreview = ref();
 const jobCategory  = ref();
 const countries    = ref();
+const cities       = ref();
 const isSubmitted  = ref(false);
 const errors       = ref('');
 
@@ -51,6 +52,13 @@ const getCountries = async() =>{
     const res = await application.getCountries();
     if(res?.success){
         countries.value = res.result;
+    }
+}
+
+const getCities = async() =>{
+    const res = await application.getCities();
+    if(res?.success){
+        cities.value = res.result;
     }
 }
 
@@ -119,32 +127,32 @@ const submit = async() =>{
 
     let a= 0;
     for(const dayName of day.value){
-        formData.append(`schedules[${a++}][day]`, dayName);
+        formData.append(`schedules[${a++}][day]`, dayName );
     }
 
     let b = 0;
     for(const earlyValue of early.value){
-        formData.append(`schedules[${b++}][early]`, earlyValue);
+        formData.append(`schedules[${b++}][early]`, earlyValue ? 1 : 0);
     }
     
     let c = 0;
     for(const lateValue of late.value){
-        formData.append(`schedules[${c++}][late]`, lateValue);
+        formData.append(`schedules[${c++}][late]`, lateValue ? 1 : 0);
     }
     
     let d = 0;
     for(const nightValue of night.value){
-        formData.append(`schedules[${d++}][night]`, nightValue);
+        formData.append(`schedules[${d++}][night]`, nightValue ? 1 : 0);
     }
     
     let e = 0;
     for(const unavailableValue of unavailable.value){
-        formData.append(`schedules[${e++}][unavailable]`, unavailableValue);
+        formData.append(`schedules[${e++}][unavailable]`, unavailableValue ? 1 : 0);
     }
 
     const res = await application.insert(formData);
     if(res?.success){
-        notification.Success("Application Successfully Submitted");
+        notification.Success("Application Successfully Submitted" );
         isSubmitted.value = true;
     }else{
         errors.value = res?.errors;
@@ -155,6 +163,7 @@ const submit = async() =>{
 onMounted(() => {
     getDesignation();
     getCountries();
+    getCities();
 })
 </script>
 
@@ -322,7 +331,7 @@ onMounted(() => {
                                     <label for="name">City <span class="text-danger">*</span></label>
                                     <select id="" class="form-control" v-model="cityId">
                                         <option value="">Select One</option>
-                                        <option value="1">Dhaka</option>
+                                        <option :value="city.id" v-for="(city, index) in cities?.data" :key="index">{{ city.name }}</option>
                                     </select>
                                     <span v-if="errors">
                                         <span class="text-danger" v-for="(error, index) in errors?.city_id" :key="index">{{ error }}</span>
@@ -377,7 +386,9 @@ onMounted(() => {
                                     <label for="name">Passport Type <span class="text-danger">*</span></label>
                                     <select id="" class="form-control" v-model="passportType">
                                         <option value="">Select One</option>
-                                        <option value="ordinary">Ordinary</option>
+                                        <option value="British">British</option>
+                                        <option value="EU Passport">EU Passport</option>
+                                        <option value="Others Passport">Others Passport</option>
                                     </select>
                                     <span v-if="errors">
                                         <span class="text-danger" v-for="(error, index) in errors?.passport_type" :key="index">{{ error }}</span>
