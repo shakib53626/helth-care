@@ -156,7 +156,7 @@ onMounted(() => {
     </div>
   </div>
 
-    <!-- @media screen and (max-width:768px) {
+  <!-- @media screen and (max-width:768px) {
     .chat-item{
       right: 80px;
       bottom: 84px;

@@ -11,6 +11,8 @@ import AllServices from '@/views/pages/Services.vue'
 import ServiceDetails from '@/views/pages/ServiceDetails.vue'
 
 import ApplyForm from '@/views/pages/ApplyForm.vue' 
+import Blogs from '@/views/pages/Blog.vue'
+import BlogDetails from '@/views/pages/BlogDetails.vue'
 
 const routes =[	
     { 
@@ -61,6 +63,18 @@ const routes =[
       name:'apply-form',
       component: ApplyForm,
       meta: { title: 'Apply Form'}
+    },
+    { 
+      path: '/blogs',
+      name:'blogs',
+      component: Blogs,
+      meta: { title: 'All Blogs'}
+    },
+    { 
+      path: '/blog-details/:id',
+      name:'blog-details',
+      component: BlogDetails,
+      meta: { title: 'Blog Details'}
     },
   ];
 
