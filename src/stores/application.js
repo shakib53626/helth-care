@@ -31,9 +31,13 @@ export const useApplication = defineStore("application", {
             }
         },
         
-        async getCities(){
+        async getCities(countryId){
             try {
-                const res = await axiosInstance.get('/cities');
+                const res = await axiosInstance.get('/cities', {
+                    params : {
+                        country_id : countryId,
+                    }
+                });
                 if(res.data?.success){
                     return res.data;
                 }

@@ -41,7 +41,7 @@ onMounted(() => {
                 <div class="row">
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-md-4 mb-4" v-for="(post, index) in blogData?.data" :key="index">
+                            <div class="col-md-6 mb-4" v-for="(post, index) in blogData?.data" :key="index">
                                 <div class="card blog-card">
                                     <div class="card-body">
                                         <img :src="post.image" alt="">

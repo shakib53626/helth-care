@@ -55,8 +55,8 @@ const getCountries = async() =>{
     }
 }
 
-const getCities = async() =>{
-    const res = await application.getCities();
+const getCountryWiseCity = async() =>{
+    const res = await application.getCities(countryId.value);
     if(res?.success){
         cities.value = res.result;
     }
@@ -163,7 +163,6 @@ const submit = async() =>{
 onMounted(() => {
     getDesignation();
     getCountries();
-    getCities();
 })
 </script>
 
@@ -327,16 +326,6 @@ onMounted(() => {
                                         <span class="text-danger" v-for="(error, index) in errors?.post_code" :key="index">{{ error }}</span>
                                     </span>
                                 </div>
-                                <div class="col-md-4 mt-4">
-                                    <label for="name">City <span class="text-danger">*</span></label>
-                                    <select id="" class="form-control" v-model="cityId">
-                                        <option value="">Select One</option>
-                                        <option :value="city.id" v-for="(city, index) in cities?.data" :key="index">{{ city.name }}</option>
-                                    </select>
-                                    <span v-if="errors">
-                                        <span class="text-danger" v-for="(error, index) in errors?.city_id" :key="index">{{ error }}</span>
-                                    </span>
-                                </div>
                                 <div class="col-md-12 mt-4">
                                     <label for="name">Address Field <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" placeholder="Enter Your Address" v-model="address">
@@ -360,12 +349,22 @@ onMounted(() => {
                                 </div>
                                 <div class="col-md-4 mt-4">
                                     <label for="name">Country <span class="text-danger">*</span></label>
-                                    <select id="" class="form-control" v-model="countryId">
+                                    <select id="" class="form-control" v-model="countryId" @change="getCountryWiseCity">
                                         <option value="">Select One</option>
                                         <option :value="country.id" v-for="(country, index) in countries?.data" :key="index">{{ country.name }}</option>
                                     </select>
                                     <span v-if="errors">
                                         <span class="text-danger" v-for="(error, index) in errors?.country_id" :key="index">{{ error }}</span>
+                                    </span>
+                                </div>
+                                <div class="col-md-4 mt-4">
+                                    <label for="name">City <span class="text-danger">*</span></label>
+                                    <select id="" class="form-control" v-model="cityId">
+                                        <option value="">Select One</option>
+                                        <option :value="city.id" v-for="(city, index) in cities?.data" :key="index">{{ city.name }}</option>
+                                    </select>
+                                    <span v-if="errors">
+                                        <span class="text-danger" v-for="(error, index) in errors?.city_id" :key="index">{{ error }}</span>
                                     </span>
                                 </div>
                                 <div class="col-md-4 mt-4">
@@ -408,14 +407,14 @@ onMounted(() => {
                                         <span class="text-danger" v-for="(error, index) in errors?.cv" :key="index">{{ error }}</span>
                                     </span>
                                 </div>
-                                <div class="col-md-4 mt-4">
+                                <!-- <div class="col-md-4 mt-4">
                                     <label for="name">Upload BRB</label>
                                     <input type="file" class="form-control">
                                 </div>
                                 <div class="col-md-4 mt-4">
                                     <label for="name">Upload your UKVI share code <span class="text-danger">*</span></label>
                                     <input type="file" class="form-control">
-                                </div>
+                                </div> -->
                                 <div class="col-md-4 mt-4">
                                     <label for="name">Passport Number <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" placeholder="Enter Passport Number" v-model="passportNumber">
