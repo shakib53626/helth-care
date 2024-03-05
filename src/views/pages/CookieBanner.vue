@@ -28,7 +28,7 @@ export default {
         <div>
             <div class="container">
                 <div>
-                    <p>This website stores cookies on your computer, which collect information about how you interact with our website and allow us to remember you. We use this information to improve your browsing experience and for metrics about our visitors both on this website and other media. To find out more about the cookies we use, see our Privacy Policy.
+                    <p>This website stores cookies on your computer, which collect information about how you interact with our website and allow us to remember you. We use this information to improve your browsing experience and for metrics about our visitors both on this website and other media. To find out more about the cookies we use, see our <router-link :to="{name:'privacy-policy'}">Privacy Policy</router-link>.
 
                     <br>If you decline, your information won’t be tracked for marketing purposes. Cookies required for basic functioning of the website will still be in use.</p>
                     <button class="btn-accept" @click="acceptCookies">Accept</button>

@@ -14,6 +14,8 @@ import ApplyForm from '@/views/pages/ApplyForm.vue'
 import Blogs from '@/views/pages/Blog.vue'
 import BlogDetails from '@/views/pages/BlogDetails.vue'
 
+import PrivacyPolicy from '@/views/pages/PrivacyPolicy.vue'
+
 const routes =[	
     { 
       path: '/',
@@ -75,6 +77,12 @@ const routes =[
       name:'blog-details',
       component: BlogDetails,
       meta: { title: 'Blog Details'}
+    },
+    { 
+      path: '/privacy-policy',
+      name:'privacy-policy',
+      component: PrivacyPolicy,
+      meta: { title: 'Privacy and Policy'}
     },
   ];
 
