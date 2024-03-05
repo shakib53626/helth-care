@@ -4,6 +4,7 @@ import Header1 from '@/views/common/Header1.vue';
 import Footer from '@/views/common/Footer.vue';
 import { ref, watch, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
+import CookieBanner from '@/views/pages/CookieBanner.vue'
 
 const themeSetting  = useThemeSetting();
 const socialContact = useSocialContact();
@@ -154,22 +155,9 @@ onMounted(() => {
         Live Chat
       </div>
     </div>
+    <CookieBanner/>
   </div>
 
-  <!-- @media screen and (max-width:768px) {
-    .chat-item{
-      right: 80px;
-      bottom: 84px;
-    }
-    .social-contact .chat-text{
-      right: 70px;
-      bottom: 80px;
-    }
-    .social-contact .message-icon{
-      right: 80px;
-      bottom: 100px;
-    }
-  } -->
 </template>
 
 <style scoped>
