@@ -1,5 +1,5 @@
 import NProgress from 'nprogress'
-import { useAuth } from '@/stores'
+import { useToken } from '@/stores'
 import {createRouter, createWebHistory} from 'vue-router'
 import Index from '@/views/pages/Index.vue'
 import AboutUs from '@/views/pages/About.vue'
@@ -100,15 +100,15 @@ const DEFAULT_TITLE = "404";
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || DEFAULT_TITLE;
   NProgress.start();
-  const loggedIn = useAuth();
+  const token = useToken();
   if(to.matched.some((record) => record.meta.requiresAuth)){
-    if(!loggedIn.user.meta){
+    if(!token.token){
       next({name:"login"});  
     }else{
       next();
     }
   }else if(to.matched.some((record) => record.meta.guest)){
-    if(loggedIn.user.meta){
+    if(token.token){
       next({name:"index"});  
     }else{
       next();

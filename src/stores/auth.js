@@ -7,6 +7,7 @@ export const useAuth = defineStore("auth", {
         user         : {},
         loading      : false,
         logoutLoading: false,
+        loggedIn     : false,
      }),
 
      persist:['user'],
@@ -22,8 +23,8 @@ export const useAuth = defineStore("auth", {
             const token = useToken();
             try {
                 const res = await axiosInstance.post('/login', data);
-                console.log(res);
                 if(res.status === 200){
+                    this.loggedIn = true;
                     this.user = res.data?.result?.user;
                     token.setToken(res.data?.result?.token);
 

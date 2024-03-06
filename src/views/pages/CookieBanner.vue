@@ -47,7 +47,7 @@ export default {
     left: 0;
     width: 100%;
     padding: 50px 0;
-    background: #CA0F20;
+    background: #484848;
     z-index: 9;
 }
 .cookie-banner p{
