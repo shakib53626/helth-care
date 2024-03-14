@@ -1,14 +1,15 @@
 <script setup>
 import { useAuth, useNotification } from '@/stores'
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
+const route        = useRoute();
 const router       = useRouter();
 const auth         = useAuth();
 const notification = useNotification();
 
 const isEditInformation = ref(true);
-const isActive = ref('ma');
+const isActive = ref(route.query.isActive ? route.query.isActive : 'ma');
 
 const name          = ref(auth.user?.name);
 const email         = ref(auth.user?.email);
@@ -203,7 +204,7 @@ const logout = async() =>{
 </template>
 
 
-<style scoped>
+<style>
 .my-account-sidebar .profile-image{
     padding: 30px 50px;
     background-color: #eee;

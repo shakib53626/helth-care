@@ -108,6 +108,7 @@ onBeforeUnmount(() => {
                         <ul>
                             <li><router-link :to="{name : 'index'}" :class="{'active' : route.name == 'index'}" @click.prevent="burgerButton">Home</router-link></li>
                             <li><router-link :to="{name : 'services'}" :class="{'active' : route.name == 'services'}" @click.prevent="burgerButton">Our Services</router-link></li>
+                            <li><router-link :to="{name : 'services-team'}" :class="{'active' : route.name == 'services-team'}" @click.prevent="burgerButton">Services Team</router-link></li>
                             <li><router-link :to="{name : 'about'}" :class="{'active' : route.name == 'about'}" @click.prevent="burgerButton">About us</router-link></li>
                             <li><router-link :to="{name : 'contact'}" :class="{'active' : route.name == 'contact'}" @click.prevent="burgerButton">Contact us</router-link></li>
                             <li><router-link :to="{name : 'blogs'}" :class="{'active' : route.name == 'blogs'}" @click.prevent="burgerButton">Blog</router-link></li>
@@ -127,7 +128,7 @@ onBeforeUnmount(() => {
                                             </div>
                                         </li>
                                         <li><router-link :to="{name:'my-account'}"><i class="fa-solid fa-user"></i> My Account</router-link></li>
-                                        <li><a><i class="fa-solid fa-key"></i> Change Password</a></li>
+                                        <li><router-link :to="{name:'my-account', query:{isActive:'changePassword'} }"><i class="fa-solid fa-key"></i> Change Password</router-link></li>
                                         <li v-if="auth.logoutLoading"><a><i class="fa-solid fa-spinner fa-spin"></i> Loading....</a></li>
                                         <li v-else><a @click="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
                                     </ul>

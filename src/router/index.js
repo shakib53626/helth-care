@@ -11,6 +11,7 @@ import MyAccount from '@/views/pages/auth/MyAccount.vue'
 
 import AllServices from '@/views/pages/Services.vue' 
 import ServiceDetails from '@/views/pages/ServiceDetails.vue'
+import ServiceTeam from '@/views/pages/ServicesTeam.vue' 
 
 import ApplyForm from '@/views/pages/ApplyForm.vue' 
 import Blogs from '@/views/pages/Blog.vue'
@@ -67,6 +68,12 @@ const routes =[
       name:'service-details',
       component: ServiceDetails,
       meta: { title: 'Service Details'}
+    },
+    { 
+      path: '/services-team',
+      name:'services-team',
+      component: ServiceTeam,
+      meta: { title: 'All Service Team'}
     },
     { 
       path: '/apply-form',

@@ -1,5 +1,6 @@
 <script setup>
-import { useThemeSetting, useServices } from '@/stores';
+import { ServiceTeamSkeleton } from '@/components'
+import { useThemeSetting, useServices, useServiceTeam } from '@/stores';
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router';
 
@@ -7,7 +8,9 @@ const themeSetting = useThemeSetting();
 
 const route          = useRoute();
 const service        = useServices();
+const serviceTeam    = useServiceTeam();
 const serviceDetails = ref({});
+const serviceTeams   = ref();
 
 const getSingleService = async() =>{
     const res = await service.getSingleService(route.params.id);
@@ -16,7 +19,15 @@ const getSingleService = async() =>{
     }
 }
 
+const getServiceTeams = async() =>{
+    const res = await serviceTeam.getServiceTeams();
+    if(res.success){
+        serviceTeams.value = res.result?.data;
+    }
+}
+
 onMounted(() => {
+    getServiceTeams();
     getSingleService();
 })
 </script>
@@ -71,6 +82,32 @@ onMounted(() => {
                 </div>
             </div>
         </div>
+        <div class="our-team" :class="{'transparent' : themeSetting.isDarkMode == 'dark'}">
+            <div class="container">
+                <div class="team-title text-center mb-4" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
+                    <h2>Service Team</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste possimus maiores quibusdam, aliquid esse velit.</p>
+                </div>
+                <div class="row">
+                    <template v-if="serviceTeam.loading">
+                        <ServiceTeamSkeleton/>
+                    </template>
+                    <template v-else>
+                        <div class="col-md-4 mb-4" v-for="(team, index) in serviceTeams" :key="index">
+                            <div class="card">
+                                <div class="card-body" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
+                                    <img :src="team.image" width="130" alt="">
+                                    <h4 class="mt-4">{{ team.name }}</h4>
+                                    <h6 class="mb-3">{{ team.designation }}</h6>
+                                    <p>{{ team.description}}</p>
+                                    <button class="btn btn-edit">Book Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -120,6 +157,10 @@ img{
 }
 .our-team .card:hover{
     color: #fff;
+}
+.our-team .card:hover .btn-edit{
+    background-color: #fff;
+    color:#CA0F20;
 }
 .card-body{
     position: relative;
