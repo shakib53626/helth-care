@@ -104,7 +104,7 @@ onBeforeUnmount(() => {
             <div class="overlay" :class="{'active' : burger}" @click.prevent="burgerButton"></div>
             <div class="nav-wrapper" :class="{'gray-slider' : themeSetting.isDarkMode=='gray', 'contrast' : themeSetting.isDarkMode=='contrast'}">
                 <nav class="dark_bg" id="menu" :class="{'active' : burger}">
-                    <div class="container d-flex justify-content-between">
+                    <div class="container d-flex justify-content-between responsive-sidebar">
                         <ul>
                             <li><router-link :to="{name : 'index'}" :class="{'active' : route.name == 'index'}" @click.prevent="burgerButton">Home</router-link></li>
                             <li><router-link :to="{name : 'services'}" :class="{'active' : route.name == 'services'}" @click.prevent="burgerButton">Our Services</router-link></li>
@@ -114,10 +114,10 @@ onBeforeUnmount(() => {
                         </ul>
                         <div>
                             <div class="user-login" v-if="auth.user">
-                                <router-link :to="{name: 'login'}" @click.prevent="burgerButton" class="d-flex align-items-center">
+                                <a @click.prevent="burgerButton" class="d-flex align-items-center">
                                     <i class="fa-solid fa-user login-icon"></i>
                                     <span>{{ auth.user?.name ? auth.user?.name : 'Login' }}</span>
-                                </router-link>
+                                </a>
                                 <div class="profile-dropdown" :class="{'bg_dark' : themeSetting.isDarkMode=='dark'}" v-if="token.token">
                                     <ul>
                                         <li>
@@ -126,7 +126,7 @@ onBeforeUnmount(() => {
                                                 <h4>{{ auth.user?.name }}</h4>
                                             </div>
                                         </li>
-                                        <li><a href=""><i class="fa-solid fa-user"></i> My Account</a></li>
+                                        <li><router-link :to="{name:'my-account'}"><i class="fa-solid fa-user"></i> My Account</router-link></li>
                                         <li><a><i class="fa-solid fa-key"></i> Change Password</a></li>
                                         <li v-if="auth.logoutLoading"><a><i class="fa-solid fa-spinner fa-spin"></i> Loading....</a></li>
                                         <li v-else><a @click="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
@@ -187,6 +187,7 @@ onBeforeUnmount(() => {
 .user-login:hover .profile-dropdown{
     height: 288px;
     transition: 0.5s;
+    z-index: 99;
 }
 .user-login:hover .profile-dropdown-logout{
     height: 72px;
@@ -261,6 +262,14 @@ onBeforeUnmount(() => {
 .bg_dark{
     background-color: #1A1A1A;
 }
-
+@media screen and (max-width: 768px) {
+    .responsive-sidebar{
+        display: flex;
+        flex-direction: column;
+    }
+    .responsive-sidebar ul{
+        order: 2;
+    }
+}
 
 </style>

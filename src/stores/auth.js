@@ -32,8 +32,10 @@ export const useAuth = defineStore("auth", {
                 }
 
             } catch (error) {
-                if(error.response?.data){
+                if(error.response?.data?.errors){
                     return error.response?.data?.errors;
+                }else{
+                    return error.response?.data;
                 }
             }
         },

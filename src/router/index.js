@@ -1,11 +1,13 @@
 import NProgress from 'nprogress'
 import { useToken } from '@/stores'
 import {createRouter, createWebHistory} from 'vue-router'
+
 import Index from '@/views/pages/Index.vue'
 import AboutUs from '@/views/pages/About.vue'
 import ContactUs from '@/views/pages/Contact.vue'
 import Login from '@/views/pages/auth/Login.vue' 
 import Register from '@/views/pages/auth/Register.vue' 
+import MyAccount from '@/views/pages/auth/MyAccount.vue'
 
 import AllServices from '@/views/pages/Services.vue' 
 import ServiceDetails from '@/views/pages/ServiceDetails.vue'
@@ -34,6 +36,12 @@ const routes =[
       name:'register',
       component: Register,
       meta: { title: 'Register', guest : true}
+    },
+    { 
+      path: '/my-account',
+      name:'my-account',
+      component: MyAccount,
+      meta: { title: 'My Account Page', requiresAuth : true}
     },
     { 
       path: '/about-us',
@@ -109,7 +117,7 @@ router.beforeEach((to, from, next) => {
     }
   }else if(to.matched.some((record) => record.meta.guest)){
     if(token.token){
-      next({name:"index"});  
+      next({name:"my-account"});  
     }else{
       next();
     }

@@ -12,6 +12,7 @@ import * as yup from 'yup';
 const notification = useNotification();
 const auth         = useAuth();
 const showPassword = ref(false);
+const error        = ref('');
 
 const schema = yup.object({
     email: yup.string().required("Email field is required").min(11),
@@ -20,11 +21,15 @@ const schema = yup.object({
 
 const submit = async(values, {setErrors}) =>{
     let res = await auth.login(values);
-    if(res.success){
+    if(res?.success){
         router.push({name:'index'});
         notification.Success("Login Success")
     }else{
-        setErrors(res);
+        if(res?.message){
+            error.value = res;
+        }else{
+            setErrors(res);
+        }
     }
 }
 
@@ -52,7 +57,7 @@ const isHide = async() =>{
                             :class="{'is-invalid' : errors.email}" 
                             placeholder="Enter Email"
                         />
-                        <span class="text-danger">{{errors.email}}</span>
+                        <span class="text-danger">{{errors.email ? errors.email : error.message}}</span>
                     </div>
                     <div class="form-group" style="position:relative;">
                         <label for="password" :class="{'white' : themeSetting.isDarkMode == 'dark'}">Password</label>
