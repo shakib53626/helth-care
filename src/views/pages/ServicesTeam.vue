@@ -1,18 +1,28 @@
 <script setup>
 import { ServiceTeamSkeleton } from '@/components'
-import { useThemeSetting, useServices, useServiceTeam } from '@/stores';
+import { useThemeSetting, useServiceTeam, useToken } from '@/stores';
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router';
 
 const themeSetting = useThemeSetting();
 
-const service        = useServices();
-const serviceTeam    = useServiceTeam();
-const serviceTeams   = ref();
+const router       = useRouter();
+const serviceTeam  = useServiceTeam();
+const token        = useToken();
+const serviceTeams = ref();
 
 const getServiceTeams = async() =>{
     const res = await serviceTeam.getServiceTeams();
     if(res.success){
         serviceTeams.value = res.result?.data;
+    }
+}
+
+const bookingNow = async() =>{
+    if(!token.token){
+        router.push({name:'login'});
+    }else{
+        location.reload();
     }
 }
 
@@ -50,7 +60,7 @@ onMounted(() => {
                                         <h4 class="mt-4">{{ team.name }}</h4>
                                         <h6 class="mb-3">{{ team.designation }}</h6>
                                         <p>{{ team.description}}</p>
-                                        <button class="btn btn-edit">Book Now</button>
+                                        <button class="btn btn-edit" @click="bookingNow">Booking Now</button>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +71,7 @@ onMounted(() => {
                                         <h4 class="mt-4">{{ team.name }}</h4>
                                         <h6 class="mb-3">{{ team.designation }}</h6>
                                         <p>{{ team.description}}</p>
-                                        <button class="btn btn-edit">Book Now</button>
+                                        <button class="btn btn-edit" @click="bookingNow">Booking Now</button>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +82,7 @@ onMounted(() => {
                                         <h4 class="mt-4">{{ team.name }}</h4>
                                         <h6 class="mb-3">{{ team.designation }}</h6>
                                         <p>{{ team.description}}</p>
-                                        <button class="btn btn-edit">Book Now</button>
+                                        <button class="btn btn-edit" @click="bookingNow">Booking Now</button>
                                     </div>
                                 </div>
                             </div>
@@ -89,5 +99,9 @@ onMounted(() => {
 .our-team .card:hover .btn-edit{
     background-color: #fff;
     color:#CA0F20;
+    box-shadow: 0 7px 14px 0 rgba(255, 255, 255, 0.5);
+}
+.btn-edit:hover{
+    box-shadow: none !important;
 }
 </style>

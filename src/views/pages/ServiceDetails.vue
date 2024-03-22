@@ -85,7 +85,7 @@ onMounted(() => {
         <div class="our-team" :class="{'transparent' : themeSetting.isDarkMode == 'dark'}">
             <div class="container">
                 <div class="team-title text-center mb-4" :class="{'white' : themeSetting.isDarkMode == 'dark'}">
-                    <h2>Service Team</h2>
+                    <h2>Service Related Team</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste possimus maiores quibusdam, aliquid esse velit.</p>
                 </div>
                 <div class="row">
