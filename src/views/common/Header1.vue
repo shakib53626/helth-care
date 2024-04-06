@@ -90,7 +90,8 @@ onBeforeUnmount(() => {
                         </div>
                     </div>
                     <div class="header_cta">
-                        <router-link :to="{name : 'apply-form'}" class="btn_one">Register You Interest</router-link>
+                        <router-link :to="{name : 'apply-form'}" class="btn_one mr-2">Apply</router-link>
+                        <router-link :to="{name : 'services-booking'}" class="btn_one">Booking Service</router-link>
                     </div>
 
                     <button type="button" class="burger" :class="{'active' : burger}" id="burger" @click.prevent="burgerButton">
@@ -108,7 +109,6 @@ onBeforeUnmount(() => {
                         <ul>
                             <li><router-link :to="{name : 'index'}" :class="{'active' : route.name == 'index'}" @click.prevent="burgerButton">Home</router-link></li>
                             <li><router-link :to="{name : 'services'}" :class="{'active' : route.name == 'services'}" @click.prevent="burgerButton">Our Services</router-link></li>
-                            <li><router-link :to="{name : 'services-team'}" :class="{'active' : route.name == 'services-team'}" @click.prevent="burgerButton">Services Team</router-link></li>
                             <li><router-link :to="{name : 'about'}" :class="{'active' : route.name == 'about'}" @click.prevent="burgerButton">About us</router-link></li>
                             <li><router-link :to="{name : 'contact'}" :class="{'active' : route.name == 'contact'}" @click.prevent="burgerButton">Contact us</router-link></li>
                             <li><router-link :to="{name : 'blogs'}" :class="{'active' : route.name == 'blogs'}" @click.prevent="burgerButton">Blog</router-link></li>
