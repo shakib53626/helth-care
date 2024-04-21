@@ -29,7 +29,8 @@ onMounted(() => {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta perspiciatis adipisci et pariatur minima temporibus nostrum animi vero aperiam cum?</h1>
+                            <h1>Struggling to leave home for quality healthcare? </h1>
+                            <p>Don't worry! HOMESTAY brings quality healthcare directly to you.</p>
                         </div>
                     </div>
                 </div>
@@ -45,7 +46,16 @@ onMounted(() => {
                 <div class="row">
                     <div class="col-md-6">
                         <h5>About Our Expertise</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam et quia blanditiis, aperiam tempore velit exercitationem temporibus vero, in aliquid atque beatae debitis eligendi maxime soluta quae minus, hic expedita cum placeat facere officiis culpa necessitatibus? Amet neque perferendis molestias ad repudiandae, repellat sed velit? Dignissimos earum ipsam omnis sit commodi adipisci et magni nulla, quisquam nesciunt veritatis, mollitia hic facere inventore distinctio sed voluptatibus dicta velit maxime, blanditiis excepturi laudantium rem laboriosam nostrum. Molestiae, possimus necessitatibus. Eaque minima sint porro quam alias consequatur nam tenetur harum nihil dolores voluptates hic, voluptatum eius doloribus dolorum necessitatibus at, adipisci quia animi.</p>
+                        <p>At HOMESTAY, we understand the challenges of getting the medical care you need when traveling is difficult. Our dedicated professionals bring high-quality healthcare services right to your doorstep.  
+
+                            We offer a wide range of services, from end-of-life care to specialist dementia support, brain injury care, and mental health services for young adults and beyond.  
+                            
+                            No matter your needs, our experienced team is here to provide the best possible care in the comfort and familiarity of your own home. We will ensure you receive the treatment you deserve without the added stress of leaving your comfortable environment.
+                            
+                            Don't wait to experience the comfort and convenience of receiving quality care at home. 
+                            
+                            Book a service with HOMESTAY today and discover the difference our compassionate, in-home care can make in your life.
+                            </p>
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-5">
