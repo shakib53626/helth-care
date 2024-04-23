@@ -113,7 +113,7 @@ onBeforeUnmount(() => {
                             <li><router-link :to="{name : 'contact'}" :class="{'active' : route.name == 'contact'}" @click.prevent="burgerButton">Contact us</router-link></li>
                             <li><router-link :to="{name : 'blogs'}" :class="{'active' : route.name == 'blogs'}" @click.prevent="burgerButton">Blog</router-link></li>
                         </ul>
-                        <div>
+                        <!-- <div>
                             <div class="user-login" v-if="auth.user">
                                 <a @click.prevent="burgerButton" class="d-flex align-items-center">
                                     <i class="fa-solid fa-user login-icon"></i>
@@ -140,7 +140,7 @@ onBeforeUnmount(() => {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </nav>
             </div>

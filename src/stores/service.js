@@ -47,6 +47,22 @@ export const useServices = defineStore("services", {
             }
         },
 
+        async submitOrder(data){
+            this.loading = true;
+            try {
+                const res = await axiosInstance.post('/booking-services', data);
+                if(res.data?.success){
+                    return res.data;
+                }
+            } catch (error) {
+                if(error.response?.data){
+                    return error.response?.data;
+                }
+            }finally{
+                this.loading = false;
+            }
+        }
+
      },
 
 })

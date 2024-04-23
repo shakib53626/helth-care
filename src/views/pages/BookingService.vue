@@ -5,15 +5,35 @@ import { onMounted, ref } from 'vue'
 
 const themeSetting = useThemeSetting();
 
-const service  = useServices();
-const searchQuery = ref('');
-const paginateSize = ref(24);
-const services = ref({});
+const service      = useServices();
+const searchQuery  = ref('');
+const paginateSize = ref(6);
+const services     = ref({});
+const name         = ref('');
+const email        = ref('');
+const postCode     = ref('');
+const serviceId    = ref('');
+const errors       = ref('');
+const isSubmitted  = ref(false);
 
 const getServices = async(page=1) =>{
     const res = await service.getServices(page, paginateSize.value, searchQuery.value);
     if(res.success){
         services.value = res.result
+    }
+}
+
+const submitOrder = async() =>{
+    const res = await service.submitOrder({
+        name      : name.value,
+        email     : email.value,
+        Post_code : postCode.value,
+        Service_id: serviceId.value,
+    });
+    if(res.success){
+        isSubmitted.value = true;
+    }else{
+        errors.value = res.errors;
     }
 }
 
@@ -59,28 +79,45 @@ onMounted(() => {
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-md-5">
-                        <div class="card">
+                        <div class="card" v-if="isSubmitted">
+                            <h3 class="mb-4 text-success">Your Application Submitted Successfully</h3>
+                        </div>
+                        <div class="card" v-else>
                             <h3 class="mb-4">Book a Service</h3>
                             <div class="form-group mb-3">
                                 <label for="name">Your Name</label>
-                                <input type="text" id="name" class="form-control" placeholder="Your Name">
+                                <input type="text" id="name" class="form-control" placeholder="Your Name" v-model="name">
+                                <span v-if="errors">
+                                    <span v-for="(error, index) in errors?.name" :key="index" class="text-danger">{{ error }}</span>
+                                </span>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email">Your Email</label>
-                                <input type="email" id="email" class="form-control" placeholder="Your Email">
+                                <input type="email" id="email" class="form-control" placeholder="Your Email" v-model="email">
+                                <span v-if="errors">
+                                    <span v-for="(error, index) in errors?.email" :key="index" class="text-danger">{{ error }}</span>
+                                </span>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="postCode">Post Code</label>
-                                <input type="text" id="postCode" class="form-control" placeholder="Post Code">
+                                <input type="text" id="postCode" class="form-control" placeholder="Post Code" v-model="postCode">
+                                <span v-if="errors">
+                                    <span v-for="(error, index) in errors?.Post_code" :key="index" class="text-danger">{{ error }}</span>
+                                </span>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="service">Choose a Service</label>
-                                <select name="" id="service" class="form-control">
-                                    <option value="Select One"></option>
+                                <select name="" id="service" class="form-control" v-model="serviceId">
+                                    <option value="">Select One</option>
+                                    <option :value="value.id" v-for="(value, index) in services?.data" :key="index">{{value.title}}</option>
                                 </select>
+                                <span v-if="errors">
+                                    <span v-for="(error, index) in errors?.Service_id" :key="index" class="text-danger">{{ error }}</span>
+                                </span>
                             </div>
                             <div class="form-btn">
-                                <button class="btn btn_one" style="width:100%;">Submit Details</button>
+                                <button class="btn btn_one" style="width:100%;" v-if="service.loading"><i class="fas fa-spinner fa-spin"></i> Loading....</button>
+                                <button class="btn btn_one" style="width:100%;" @click="submitOrder" v-else>Submit Details</button>
                             </div>
                         </div>
                     </div>
