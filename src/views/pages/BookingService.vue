@@ -27,8 +27,8 @@ const submitOrder = async() =>{
     const res = await service.submitOrder({
         name      : name.value,
         email     : email.value,
-        Post_code : postCode.value,
-        Service_id: serviceId.value,
+        post_code : postCode.value,
+        service_id: serviceId.value,
     });
     if(res.success){
         isSubmitted.value = true;
